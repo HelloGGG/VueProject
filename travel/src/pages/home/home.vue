@@ -1,5 +1,7 @@
 <template>
-    <div>Home</div>
+    <div>
+        <div>Home</div>
+    </div>
 </template>
 
 <script>
@@ -9,8 +11,5 @@ export default {
 </script>
 
 <style scope>
-    div {
-        text-align: center;
-    }
 </style>
 
