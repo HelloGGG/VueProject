@@ -1,7 +1,7 @@
 <template>
   <div class="icons">
      <swiper :options="swiperOption">
-      <swiper-slide v-for="list in swiperSlides" :key="list.id">
+      <swiper-slide v-for="(list,index) in swiperSlides" :key="index">
         <div class="icon-warpper" v-for="item in list" :key="item.id">
           <div class="icon">
             <img :src="item.iconUrl" alt="">
