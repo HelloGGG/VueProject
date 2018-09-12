@@ -47,7 +47,6 @@ export default {
     width: 100%
     height: 0
     padding-bottom: 33.4%
-    background: red
     .pic
       width: 100%
   .info-box
