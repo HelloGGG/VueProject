@@ -3,9 +3,7 @@
      <swiper :options="swiperOption">
       <swiper-slide v-for="(list,index) in swiperSlides" :key="index">
         <div class="icon-warpper" v-for="item in list" :key="item.id">
-          <div class="icon">
-            <img :src="item.iconUrl" alt="">
-          </div>
+          <img :src="item.iconUrl" alt="">
           <p class="icon-desc">{{item.desc}}</p>
         </div>
       </swiper-slide>
@@ -86,30 +84,24 @@ export default {
 
 <style lang="stylus" scoped>
   @import '~styles/minx.styl'
+  .icons >>> .swiper-slide
+    display: flex
+    flex-flow: row wrap
   .icons
     overflow: hidden
-    width: 100%
-    height: 0
-    padding-bottom: 50.6%
+    margin-top: 0.2rem
     .icon-warpper
-      float: left
-      overflow: hidden
       width: 25%
-      height: 0
-      padding-bottom: 25%
-      .icon
-        overflow: hidden
-        height: 0
-        padding-bottom: 60%
-        padding-top: 0.02rem
-        img
-          display: block
-          width: 60%
-          margin: 0.1rem auto
+      img
+        display: block
+        width: 1.1rem
+        height 1.1rem
+        margin: 0.1rem auto
       .icon-desc
-        height: 0
-        padding-bottom: 12%
         text-align: center
-        padding-top: 0.2rem
+        font-size: 0.28rem
+        margin-top: 0.1rem
+        height: 0.3rem
+        line-height: 0.3rem
         ellipsis()
 </style>
