@@ -1,11 +1,7 @@
 <template>
   <div class="icons">
      <swiper :options="swiperOption">
-<<<<<<< HEAD
       <swiper-slide v-for="(list,index) in swiperSlides" :key="index">
-=======
-      <swiper-slide v-for="(list, index) in swiperSlides" :key="index">
->>>>>>> origin/index-icons2
         <div class="icon-warpper" v-for="item in list" :key="item.id">
           <div class="icon">
             <img :src="item.iconUrl" alt="">
