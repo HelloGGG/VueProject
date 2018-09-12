@@ -1,5 +1,5 @@
 <template>
-  <div class="icons">
+  <div class="icons border-bottom">
      <swiper :options="swiperOption">
       <swiper-slide v-for="(list,index) in swiperSlides" :key="index">
         <div class="icon-warpper" v-for="item in list" :key="item.id">
@@ -101,7 +101,7 @@ export default {
         text-align: center
         font-size: 0.28rem
         margin-top: 0.1rem
-        height: 0.3rem
-        line-height: 0.3rem
+        height: 0.36rem
+        line-height: 0.36rem
         ellipsis()
 </style>
