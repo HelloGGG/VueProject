@@ -1,11 +1,16 @@
 <template>
   <div class="icons">
-    <div class="icon-warpper" v-for="item in items" :key="item.id">
-      <div class="icon">
-        <img :src="item.iconUrl" alt="">
-      </div>
-      <p class="icon-desc">{{item.desc}}</p>
-    </div>
+     <swiper :options="swiperOption">
+      <swiper-slide v-for="list in swiperSlides" :key="list.id">
+        <div class="icon-warpper" v-for="item in list" :key="item.id">
+          <div class="icon">
+            <img :src="item.iconUrl" alt="">
+          </div>
+          <p class="icon-desc">{{item.desc}}</p>
+        </div>
+      </swiper-slide>
+      <div class="swiper-pagination"  slot="pagination"></div>
+    </swiper>
   </div>
 </template>
 
@@ -14,6 +19,12 @@ export default {
   name: 'HomeIcons',
   data () {
     return {
+      swiperOption: {
+        pagination: {
+          el: '.swiper-pagination'
+        },
+        loop: true
+      },
       items: [
         {
           id: '0001',
@@ -47,8 +58,27 @@ export default {
           id: '0008',
           iconUrl: 'http://img1.qunarzz.com/piao/fusion/1804/95/8d02011d149bdb02.png',
           desc: '汽车票'
+        }, {
+          id: '0009',
+          iconUrl: 'http://img1.qunarzz.com/piao/fusion/1805/57/1e29afd06f881102.png',
+          desc: '普陀山'
         }
       ]
+    }
+  },
+  computed: {
+    swiperSlides () {
+      var pages = []
+      this.items.forEach((item, index) => {
+        var pageIndex = Math.floor(index / 8)
+        if (!pages[pageIndex]) {
+          pages[pageIndex] = []
+          pages[pageIndex].push(item)
+        } else {
+          pages[pageIndex].push(item)
+        }
+      })
+      return pages
     }
   }
 }
