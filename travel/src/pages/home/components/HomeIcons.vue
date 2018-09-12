@@ -1,7 +1,11 @@
 <template>
   <div class="icons">
      <swiper :options="swiperOption">
+<<<<<<< HEAD
       <swiper-slide v-for="(list,index) in swiperSlides" :key="index">
+=======
+      <swiper-slide v-for="(list, index) in swiperSlides" :key="index">
+>>>>>>> origin/index-icons2
         <div class="icon-warpper" v-for="item in list" :key="item.id">
           <div class="icon">
             <img :src="item.iconUrl" alt="">
@@ -29,7 +33,7 @@ export default {
         {
           id: '0001',
           iconUrl: 'http://img1.qunarzz.com/piao/fusion/1803/95/f3dd6c383aeb3b02.png',
-          desc: '热门景点'
+          desc: '热门景点快来参观'
         }, {
           id: '0002',
           iconUrl: 'http://img1.qunarzz.com/piao/fusion/1803/67/9a1678221b8e0e02.png',
@@ -85,6 +89,7 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
+  @import '~styles/minx.styl'
   .icons
     overflow: hidden
     width: 100%
@@ -106,9 +111,9 @@ export default {
           width: 60%
           margin: 0.1rem auto
       .icon-desc
-        overflow: hidden
         height: 0
-        padding-bottom: 20%
+        padding-bottom: 12%
         text-align: center
         padding-top: 0.2rem
+        ellipsis()
 </style>
