@@ -2,7 +2,9 @@
     <div class="header">
         <div class="header-left iconfont">&#xe624;</div>
         <div class="header-input iconfont">&#xe6fe;请输入城市/景点/游玩主题</div>
-        <div class="header-right iconfont">{{city}}&#xe64a;</div>
+        <router-link to="/city">
+          <div class="header-right iconfont">{{city}}&#xe64a;</div>
+        </router-link>
     </div>
 </template>
 
@@ -21,7 +23,7 @@ export default {
       display: flex;
       flex-direction: row;
       width: 100%;
-      height: 0.88rem;
+      height: $headerHeight;
       background: $bg;
       align-items: center;
 
