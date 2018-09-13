@@ -35,11 +35,12 @@ export default {
     color: $bg
     background: #fff
   .search
+    position: relative
     display: flex
     height: .4rem
     line-height: .4rem
     background: $bg
-    padding: .2rem 1rem
+    padding: 0 1rem .2rem 1rem
     color: #fff
     text-align: center
     .domestic, .overseas
