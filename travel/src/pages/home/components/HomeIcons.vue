@@ -1,8 +1,8 @@
 <template>
   <div class="icons border-bottom">
      <swiper :options="swiperOption">
-      <swiper-slide v-for="(list,index) in swiperSlides" :key="index">
-        <div class="icon-warpper" v-for="item in list" :key="item.id">
+      <swiper-slide v-for="(ls,index) in swiperSlides" :key="index">
+        <div class="icon-warpper" v-for="item in ls" :key="item.id">
           <img :src="item.iconUrl" alt="">
           <p class="icon-desc">{{item.desc}}</p>
         </div>
@@ -15,6 +15,9 @@
 <script>
 export default {
   name: 'HomeIcons',
+  props: {
+    list: Array
+  },
   data () {
     return {
       swiperOption: {
@@ -22,52 +25,13 @@ export default {
           el: '.swiper-pagination'
         },
         loop: true
-      },
-      items: [
-        {
-          id: '0001',
-          iconUrl: 'http://img1.qunarzz.com/piao/fusion/1803/95/f3dd6c383aeb3b02.png',
-          desc: '热门景点快来参观'
-        }, {
-          id: '0002',
-          iconUrl: 'http://img1.qunarzz.com/piao/fusion/1803/67/9a1678221b8e0e02.png',
-          desc: '古镇'
-        }, {
-          id: '0003',
-          iconUrl: 'http://img1.qunarzz.com/piao/fusion/1803/50/26ffa31b56646402.png',
-          desc: '亲子游'
-        }, {
-          id: '0004',
-          iconUrl: 'http://img1.qunarzz.com/piao/fusion/1803/20/831d62d2e1c7be02.png',
-          desc: '名胜古迹'
-        }, {
-          id: '0005',
-          iconUrl: 'http://img1.qunarzz.com/piao/fusion/1804/ff/fdf170ee89594b02.png',
-          desc: '嘉兴必游'
-        }, {
-          id: '0006',
-          iconUrl: 'http://img1.qunarzz.com/piao/fusion/1803/b8/c5dcdb58deec2402.png',
-          desc: '虎踞峡'
-        }, {
-          id: '0007',
-          iconUrl: 'http://img1.qunarzz.com/piao/fusion/1803/8c/47630407f70e8302.png',
-          desc: '横店影视城'
-        }, {
-          id: '0008',
-          iconUrl: 'http://img1.qunarzz.com/piao/fusion/1804/95/8d02011d149bdb02.png',
-          desc: '汽车票'
-        }, {
-          id: '0009',
-          iconUrl: 'http://img1.qunarzz.com/piao/fusion/1805/57/1e29afd06f881102.png',
-          desc: '普陀山'
-        }
-      ]
+      }
     }
   },
   computed: {
     swiperSlides () {
       var pages = []
-      this.items.forEach((item, index) => {
+      this.list.forEach((item, index) => {
         var pageIndex = Math.floor(index / 8)
         if (!pages[pageIndex]) {
           pages[pageIndex] = []

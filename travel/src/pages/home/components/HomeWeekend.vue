@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="title">周末去哪儿</div>
-    <div class="items-box border-bottom" v-for="item in items" :key="item.id">
+    <div class="items-box border-bottom" v-for="item in list" :key="item.id">
       <div class="img-wrap">
         <img :src="item.imgUrl" alt="" class="pic">
       </div>
@@ -16,20 +16,8 @@
 <script>
 export default {
   name: 'HomeWeekend',
-  data () {
-    return {
-      items: [{
-        id: '0001',
-        imgUrl: 'http://img1.qunarzz.com/sight/source/1505/f1/c2066187e1b26c.jpg_r_640x214_e4c882f0.jpg',
-        info: '嘉兴必游TOP10',
-        desc: '小桥，流水，人家'
-      }, {
-        id: '0002',
-        imgUrl: 'http://img1.qunarzz.com/sight/source/1505/69/490fe2414dfc35.jpg_r_640x214_b642009a.jpg',
-        info: '回味儿童趣',
-        desc: '小鬼当家，闹不停'
-      }]
-    }
+  props: {
+    list: Array
   }
 }
 </script>

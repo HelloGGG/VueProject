@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="iconfont title"><span class="icon">&#xe616;</span> 猜你喜欢</div>
-    <div class="recommand-box border-bottom" v-for="item in items" :key="item.id">
+    <div class="recommand-box border-bottom" v-for="item in list" :key="item.id">
       <img :src="item.imgUrl" alt="">
       <div class="info">
         <p class="place">{{item.place}}</p>
@@ -15,27 +15,8 @@
 <script>
 export default {
   name: 'HomeRecommand',
-  data () {
-    return {
-      items: [
-        {
-          id: '0001',
-          imgUrl: 'http://img1.qunarzz.com/sight/p0/1603/5d/5dd523afbdbb037c90.water.jpg_200x200_3e4f203f.jpg',
-          place: '乌镇',
-          comment: '12799条评论'
-        }, {
-          id: '0002',
-          imgUrl: 'http://img1.qunarzz.com/sight/p0/201401/10/c15067e404b3b7c84a93f62d89aebf33.jpg_200x200_96c23ef5.jpg',
-          place: '云澜湾景区',
-          comment: '725条评论'
-        }, {
-          id: '0003',
-          imgUrl: 'http://img1.qunarzz.com/sight/p0/201302/05/7baaa81258670852c8d65eac.jpg_200x200_65d90332.jpg',
-          place: '乌镇西栅',
-          comment: '8043条评论'
-        }
-      ]
-    }
+  props: {
+    list: Array
   }
 }
 </script>
