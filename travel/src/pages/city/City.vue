@@ -3,6 +3,7 @@
     <city-header></city-header>
     <city-search></city-search>
     <city-list></city-list>
+    <city-alpha-bet></city-alpha-bet>
   </div>
 </template>
 
@@ -10,12 +11,14 @@
 import CityHeader from './components/CityHeader'
 import CitySearch from './components/CitySearch'
 import CityList from './components/CityList'
+import CityAlphaBet from './components/CityAlphaBet'
 export default {
   name: 'City',
   components: {
     CityHeader,
     CitySearch,
-    CityList
+    CityList,
+    CityAlphaBet
   }
 }
 </script>
@@ -23,5 +26,4 @@ export default {
 <style lang="stylus" scoped>
   html
     overflow-y: hidden
-    height: 100%
 </style>

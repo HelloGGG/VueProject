@@ -113,7 +113,7 @@ export default {
         text-align: center
       .sort-item
         box-sizing: border-box
-        width: 16.67%
+        width: 16.66%
         line-height: .9rem
         height: .9rem
         text-align: center
