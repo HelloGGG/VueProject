@@ -21,4 +21,7 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
+  html
+    overflow-y: hidden
+    height: 100%
 </style>

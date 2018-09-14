@@ -12,7 +12,4 @@ export default {
 </script>
 
 <style lang="stylus">
-  html, body
-    overflow:hidden
-    overflow-y:auto
 </style>

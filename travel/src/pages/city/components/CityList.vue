@@ -1,6 +1,6 @@
 <template>
-  <div class="wrapper" ref="tab">
-    <div class="city-list">
+  <div class="city-list" ref="tab">
+    <div class="wrapper">
       <div class="hot-city">
         <div class="title">热门城市</div>
         <div class="item-box">
@@ -75,7 +75,10 @@
 <script>
 import BScroll from 'better-scroll'
 export default {
-  name: 'CityList'
+  name: 'CityList',
+  mounted () {
+    this.scroll = new BScroll(this.$refs.tab)
+  }
 }
 </script>
 
@@ -83,16 +86,19 @@ export default {
   @import '~styles/minx.styl'
   .sort-padding
     padding: .3rem 0
-
   .city-list
-    position: fixed
     overflow: hidden
+    position: absolute
+    top: 1.48rem
+    left: 0
+    right: 0
+    bottom: 0
+    z-index: 3
     .title
       position: relative
       font-size: .24rem
       padding: .24rem .3rem
       background: #f5f5f5
-      z-index: 2
     .item-box
       position: relative
       display: flex
@@ -119,6 +125,7 @@ export default {
         height: .9rem
         text-align: center
     .item-box
-      .s-item:nth-child(3n)
+      .s-item:nth-child(3n), .alpha-item:nth-child(4n)
         border-right: none
+
 </style>
