@@ -1,9 +1,19 @@
 <template>
   <div>
-    <city-header></city-header>
-    <city-search></city-search>
-    <city-list :cities="cities" :hotCities="hotCities"></city-list>
-    <city-alpha-bet :cities="cities"></city-alpha-bet>
+    <div class="header-search">
+      <city-header></city-header>
+      <city-search @changeAjax="handleChangeAjax"></city-search>
+    </div>
+    <city-list
+      :cities="cities"
+      :hotCities="hotCities"
+      :letter="letter"
+    ></city-list>
+    <city-alpha-bet
+      :cities="cities"
+      :letters="letters"
+      @change="handleChange"
+    ></city-alpha-bet>
   </div>
 </template>
 
@@ -24,7 +34,17 @@ export default {
   data () {
     return {
       hotCities: [],
-      cities: {}
+      cities: {},
+      letter: ''
+    }
+  },
+  computed: {
+    letters () {
+      var letters = []
+      for (let i in this.cities) {
+        letters.push(i)
+      }
+      return letters
     }
   },
   methods: {
@@ -38,6 +58,16 @@ export default {
         this.hotCities = data.hotCities
         this.cities = data.cities
       }
+    },
+    handleChange (arg) {
+      this.letter = arg
+    },
+    handleChangeAjax (arg) {
+      if (arg) {
+        axios.get('/api/cities.json').then(this.getCityDataSucc)
+      } else {
+        axios.get('/api/foregin.json').then(this.getCityDataSucc)
+      }
     }
   },
   mounted () {
@@ -47,6 +77,11 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-  html
-    overflow-y: hidden
+  html, body
+    overflow: hidden
+    overflow-y: auto
+  .header-search
+    position: absolute
+    width: 100%
+    z-index: 1
 </style>

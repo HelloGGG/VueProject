@@ -10,11 +10,18 @@
       <div class="sort">
         <div class="title">字母排序</div>
         <div class="item-box sort-padding">
-          <div class="sort-item" v-for="(item, key) in cities" :key="key">{{key}}</div>
+          <div class="sort-item"
+            v-for="(item, key) in cities"
+            :key="key"
+            @click="handleClick"
+            >{{key}}</div>
         </div>
       </div>
       <div class="alpha">
-        <div v-for="(item, key) in cities" :key="key">
+        <div
+          v-for="(item, key) in cities"
+          :key="key"
+          :ref="key">
           <div class="title">{{key}}</div>
           <div class="item-box">
             <div class="alpha-item" v-for="cl in item" :key="cl.id">{{cl.name}}</div>
@@ -30,11 +37,32 @@ import BScroll from 'better-scroll'
 export default {
   props: {
     cities: Object,
-    hotCities: Array
+    hotCities: Array,
+    letter: String
+  },
+  data () {
+    return {
+      character: ''
+    }
   },
   name: 'CityList',
+  methods: {
+    handleClick (e) {
+      this.character = e.target.innerText
+      var element = this.$refs[this.character][0]
+      this.scroll.scrollToElement(element)
+    }
+  },
   mounted () {
     this.scroll = new BScroll(this.$refs.tab)
+  },
+  watch: {
+    letter () {
+      if (this.letter) {
+        var element = this.$refs[this.letter][0]
+        this.scroll.scrollToElement(element)
+      }
+    }
   }
 }
 </script>
@@ -50,7 +78,7 @@ export default {
     left: 0
     right: 0
     bottom: 0
-    z-index: 3
+    z-index: 10
     .title
       position: relative
       font-size: .24rem
@@ -68,6 +96,7 @@ export default {
         line-height: .9rem
         height: .9rem
         text-align: center
+        ellipsis()
       .sort-item
         box-sizing: border-box
         width: 16.66%
@@ -81,6 +110,7 @@ export default {
         line-height: .9rem
         height: .9rem
         text-align: center
+        ellipsis()
     .item-box
       .s-item:nth-child(3n), .alpha-item:nth-child(4n)
         border-right: none

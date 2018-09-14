@@ -2,7 +2,13 @@
   <div class="alpha-bet">
     <div class="alpha"
         v-for="(item, key) in cities"
-        :key="key">
+        :key="key"
+        :ref="key"
+        @click="handleClick"
+        @touchstart="handleTouchStart"
+        @touchmove="handleTouchMove"
+        @touchend="handleTouchEnd"
+    >
         {{key}}
     </div>
   </div>
@@ -11,9 +17,37 @@
 <script>
 export default {
   props: {
-    cities: Object
+    cities: Object,
+    letters: Array
   },
-  name: 'CityAlphaBet'
+  data () {
+    return {
+      touchStatus: false
+    }
+  },
+  name: 'CityAlphaBet',
+  methods: {
+    handleClick (e) {
+      this.$emit('change', e.target.innerText)
+    },
+    handleTouchStart () {
+      this.touchStatus = true
+    },
+    handleTouchMove (e) {
+      if (this.touchStatus) {
+        this.letter = e.target.innerText
+        var startY = this.$refs['A'][0].offsetTop
+        var endY = e.touches[0].clientY
+        var index = Math.floor((endY - startY) / 15)
+        if (index >= 0 && index <= this.letters.length) {
+          this.$emit('change', this.letters[index])
+        }
+      }
+    },
+    handleTouchEnd (e) {
+      this.touchStatus = false
+    }
+  }
 }
 </script>
 
@@ -25,10 +59,11 @@ export default {
     align-items: center
     position: absolute
     right: 0
-    top: 3.5rem
     width: .2rem
-    z-index: 10
+    z-index: 15
     margin-right: .1rem
+    height: 100%
+    justify-content: center
     .alpha
      line-height: .3rem
      margin:.02rem 0

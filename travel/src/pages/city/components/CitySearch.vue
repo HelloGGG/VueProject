@@ -24,6 +24,7 @@ export default {
   methods: {
     handleClick () {
       this.isActivate = !this.isActivate
+      this.$emit('changeAjax', this.isActivate)
     }
   }
 }
