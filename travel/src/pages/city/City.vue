@@ -1,18 +1,23 @@
 <template>
   <div>
-    <div class="header-search">
-      <city-header></city-header>
-      <city-search @changeAjax="handleChangeAjax"></city-search>
-    </div>
+    <city-header></city-header>
+    <city-search
+    :isShow="!show"
+    @changeAjax="handleChangeAjax"
+    @changeList="handleChangeList"
+    :cities="cities"
+    ></city-search>
     <city-list
       :cities="cities"
       :hotCities="hotCities"
       :letter="letter"
+      v-show="show"
     ></city-list>
     <city-alpha-bet
       :cities="cities"
       :letters="letters"
       @change="handleChange"
+      v-show="show"
     ></city-alpha-bet>
   </div>
 </template>
@@ -35,7 +40,8 @@ export default {
     return {
       hotCities: [],
       cities: {},
-      letter: ''
+      letter: '',
+      show: true
     }
   },
   computed: {
@@ -62,12 +68,16 @@ export default {
     handleChange (arg) {
       this.letter = arg
     },
-    handleChangeAjax (arg) {
+    handleChangeAjax (arg, isShow) {
+      this.show = isShow
       if (arg) {
         axios.get('/api/cities.json').then(this.getCityDataSucc)
       } else {
         axios.get('/api/foregin.json').then(this.getCityDataSucc)
       }
+    },
+    handleChangeList (arg) {
+      this.show = arg
     }
   },
   mounted () {
@@ -80,8 +90,4 @@ export default {
   html, body
     overflow: hidden
     overflow-y: auto
-  .header-search
-    position: absolute
-    width: 100%
-    z-index: 1
 </style>

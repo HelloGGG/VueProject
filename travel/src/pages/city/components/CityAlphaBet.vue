@@ -70,10 +70,12 @@ export default {
     width: .2rem
     z-index: 15
     margin-right: .1rem
-    height: 100%
+    top: 0
+    right: 0
+    bottom: 0
     justify-content: center
     .alpha
-     line-height: .3rem
+     line-height: .36rem
      margin:.02rem 0
      color: $bg
 </style>
