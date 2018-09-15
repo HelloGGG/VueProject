@@ -1,6 +1,14 @@
 <template>
   <div class="city-list" ref="tab">
     <div class="wrapper">
+      <div>
+        <div class="current-city">
+          <div class="title">当前城市</div>
+          <div class="item-box">
+            <div class="s-item">嘉兴</div>
+          </div>
+        </div>
+      </div>
       <div class="hot-city">
         <div class="title">热门城市</div>
         <div class="item-box">
