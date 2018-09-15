@@ -22,10 +22,15 @@ export default {
   },
   data () {
     return {
-      touchStatus: false
+      touchStatus: false,
+      startY: 0,
+      timer: null
     }
   },
   name: 'CityAlphaBet',
+  updated () {
+    this.startY = this.$refs['A'][0].offsetTop
+  },
   methods: {
     handleClick (e) {
       this.$emit('change', e.target.innerText)
@@ -35,13 +40,16 @@ export default {
     },
     handleTouchMove (e) {
       if (this.touchStatus) {
-        this.letter = e.target.innerText
-        var startY = this.$refs['A'][0].offsetTop
-        var endY = e.touches[0].clientY
-        var index = Math.floor((endY - startY) / 15)
-        if (index >= 0 && index <= this.letters.length) {
-          this.$emit('change', this.letters[index])
+        if (this.timer) {
+          clearTimeout(this.timer)
         }
+        var endY = e.touches[0].clientY
+        var index = Math.floor((endY - this.startY) / 15)
+        this.timer = setTimeout(() => {
+          if (index >= 0 && index <= this.letters.length) {
+            this.$emit('change', this.letters[index])
+          }
+        }, 16)
       }
     },
     handleTouchEnd (e) {
