@@ -5,14 +5,19 @@
         <div class="current-city">
           <div class="title">当前城市</div>
           <div class="item-box">
-            <div class="s-item">嘉兴</div>
+            <div class="s-item"
+            >{{currentCity}}</div>
           </div>
         </div>
       </div>
       <div class="hot-city">
         <div class="title">热门城市</div>
         <div class="item-box">
-          <div class="s-item" v-for="item in hotCities" :key="item.id">{{item.name}}</div>
+          <div class="s-item"
+            v-for="item in hotCities"
+            :key="item.id"
+            @click="handleCityClick(item.name)"
+          >{{item.name}}</div>
         </div>
       </div>
       <div class="sort">
@@ -32,7 +37,11 @@
           :ref="key">
           <div class="title">{{key}}</div>
           <div class="item-box">
-            <div class="alpha-item" v-for="cl in item" :key="cl.id">{{cl.name}}</div>
+            <div class="alpha-item"
+             v-for="cl in item"
+             :key="cl.id"
+             @click="handleCityClick(cl.name)"
+             >{{cl.name}}</div>
           </div>
         </div>
       </div>
@@ -50,7 +59,8 @@ export default {
   },
   data () {
     return {
-      character: ''
+      character: '',
+      currentCity: this.$store.state.city
     }
   },
   name: 'CityList',
@@ -59,10 +69,12 @@ export default {
       this.character = e.target.innerText
       var element = this.$refs[this.character][0]
       this.scroll.scrollToElement(element)
+    },
+    handleCityClick (city) {
+      this.$store.commit('changeCurrentCity', city)
+      this.currentCity = this.$store.state.city
+      this.$router.push('./')
     }
-  },
-  mounted () {
-    this.scroll = new BScroll(this.$refs.tab)
   },
   watch: {
     letter () {
@@ -71,6 +83,9 @@ export default {
         this.scroll.scrollToElement(element)
       }
     }
+  },
+  mounted () {
+    this.scroll = new BScroll(this.$refs.tab)
   }
 }
 </script>

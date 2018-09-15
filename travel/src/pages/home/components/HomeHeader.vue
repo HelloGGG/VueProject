@@ -3,7 +3,7 @@
         <div class="header-left iconfont">&#xe624;</div>
         <div class="header-input iconfont">&#xe6fe;请输入城市/景点/游玩主题</div>
         <router-link to="/city">
-          <div class="header-right iconfont">{{city}}&#xe64a;</div>
+          <div class="header-right iconfont">{{currentCity}}&#xe64a;</div>
         </router-link>
     </div>
 </template>
@@ -11,8 +11,10 @@
 <script>
 export default {
   name: 'HomeHeader',
-  props: {
-    city: String
+  data () {
+    return {
+      currentCity: this.$store.state.city
+    }
   }
 }
 </script>

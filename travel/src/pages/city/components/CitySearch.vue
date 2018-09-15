@@ -26,6 +26,7 @@
         <li class="search-item border-bottom"
             v-for="(item, index) in result"
             :key="index"
+            @click="handleCityClick(item)"
         >{{item}}</li>
         <li class="search-item border-bottom"
             v-show="helpTip"
@@ -67,6 +68,10 @@ export default {
     handleInputClick () {
       this.$emit('changeList', false)
       this.resultShow = true
+    },
+    handleCityClick (city) {
+      this.$store.commit('changeCurrentCity', city)
+      this.$router.push('/')
     }
   },
   watch: {
