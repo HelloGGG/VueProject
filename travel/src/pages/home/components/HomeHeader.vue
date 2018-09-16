@@ -46,5 +46,6 @@ export default {
       .header-right
         padding: 0 .1rem
         text-align: center;
+        padding: 0 .1rem;
         color: #fff;
 </style>
