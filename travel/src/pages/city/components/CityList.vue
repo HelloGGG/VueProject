@@ -91,7 +91,7 @@ export default {
     }
   },
   mounted () {
-    this.scroll = new BScroll(this.$refs.tab)
+    this.scroll = new BScroll(this.$refs.tab, {click: true})
   }
 }
 </script>
