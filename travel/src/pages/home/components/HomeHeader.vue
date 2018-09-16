@@ -44,7 +44,7 @@ export default {
         line-height: 0.6rem;
 
       .header-right
-        width: 1.28rem;
+        padding: 0 .1rem
         text-align: center;
         color: #fff;
 </style>
