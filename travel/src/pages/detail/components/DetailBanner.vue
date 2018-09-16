@@ -1,13 +1,16 @@
 <template>
   <div>
-    <div class="banner" @click="handleBannerClick">
+    <router-link tag="div" class="banner" @click="handleBannerClick" to="/picPreview">
         <img src="http://img1.qunarzz.com/sight/p0/1603/5d/5dd523afbdbb037c90.water.jpg_600x330_5349106d.jpg" alt="">
         <div class="banner-info">
           <div class="iconfont pic-num">&#xe600;<span>58</span></div>
           <div class="place-name">乌镇(AAAAA景区)</div>
         </div>
         <div class="mask"></div>
-    </div>
+        <div class="backto iconfont"
+            @click.stop="handleBackClick"
+        >&#xe624;</div>
+    </router-link>
     <gallery
       @close="handleClose"
       v-show="show"
@@ -38,6 +41,9 @@ export default {
     },
     handleBannerClick () {
       this.show = true
+    },
+    handleBackClick () {
+      this.$router.push('/')
     }
   }
 }
@@ -79,4 +85,14 @@ export default {
       bottom: 0
       min-height: .5rem
       background-image: linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,0.8))
+    .backto
+      position: absolute
+      top: .2rem
+      left: .2rem
+      width: .72rem
+      line-height: .72rem
+      color: #fff
+      text-align: center
+      background: rgba(0,0,0,0.5)
+      border-radius: .36rem
 </style>

@@ -7,5 +7,8 @@ export default {
     } catch (e) {
       console.log('localStorage error')
     }
+  },
+  changeCurrentPic (state, currentPic) {
+    state.currentPic = currentPic
   }
 }

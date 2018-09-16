@@ -1,7 +1,7 @@
 <template>
   <div class="container" @click="handleContainerClick">
     <div class="content">
-        <swiper :options="swiperOption">
+        <swiper :options="swiperOption" ref="mySwiper">
         <swiper-slide v-for="(item, index) in imgs" :key="index">
           <img class="gallery-pic" :src="item" alt="">
         </swiper-slide>
@@ -29,10 +29,18 @@ export default {
       }
     }
   },
+  computed: {
+    swiper () {
+      return this.$refs.mySwiper.swiper
+    }
+  },
   methods: {
     handleContainerClick () {
       this.$emit('close')
     }
+  },
+  mounted () {
+    this.swiper.slideTo(this.$store.state.currentPic, 0, false)
   }
 }
 </script>
