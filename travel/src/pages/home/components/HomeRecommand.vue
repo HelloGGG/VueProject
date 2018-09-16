@@ -1,14 +1,19 @@
 <template>
   <div>
     <div class="iconfont title"><span class="icon">&#xe616;</span> 猜你喜欢</div>
-    <div class="recommand-box border-bottom" v-for="item in list" :key="item.id">
-      <img :src="item.imgUrl" alt="">
-      <div class="info">
-        <p class="place">{{item.place}}</p>
-        <p class="comment">{{item.comment}}</p>
-        <button class="btn-detail">查看详情</button>
-      </div>
-    </div>
+      <router-link tag="div"
+      class="recommand-box border-bottom"
+      v-for="item in list"
+      :key="item.id"
+      :to="'/detail/' + item.id"
+      >
+        <img :src="item.imgUrl" alt="">
+        <div class="info">
+          <p class="place">{{item.place}}</p>
+          <p class="comment">{{item.comment}}</p>
+          <button class="btn-detail">查看详情</button>
+        </div>
+      </router-link>
   </div>
 </template>
 
