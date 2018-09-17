@@ -52,10 +52,15 @@ export default {
     handleScroll () {
       let top = document.documentElement.scrollTop
       this.backShow = top <= 0
+      console.log('xxxx')
     }
   },
   activated () {
     window.addEventListener('scroll', this.handleScroll)
+  },
+  // 全局事件解绑
+  deactivated () {
+    window.removeEventListener('scroll', this.handleScroll)
   }
 }
 </script>
