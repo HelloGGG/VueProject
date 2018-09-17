@@ -5,6 +5,7 @@
     <detail-brief-info></detail-brief-info>
     <detail-recommand></detail-recommand>
     <detail-ticket></detail-ticket>
+    <detail-comment></detail-comment>
   </div>
 </template>
 
@@ -14,6 +15,7 @@ import DetailHeader from './components/DetailHeader'
 import DetailBriefInfo from './components/DetailBriefInfo'
 import DetailRecommand from './components/DetailRecommand'
 import DetailTicket from './components/DetailTicket'
+import DetailComment from './components/DetailComment'
 export default {
   name: 'Detail',
   components: {
@@ -21,7 +23,8 @@ export default {
     DetailHeader,
     DetailBriefInfo,
     DetailRecommand,
-    DetailTicket
+    DetailTicket,
+    DetailComment
   },
   data () {
     return {

@@ -1,6 +1,6 @@
 <template>
   <div class="container border-bottom iconfont">
-    查看剩余产品 &#xe62e;
+    <slot></slot>
   </div>
 </template>
 

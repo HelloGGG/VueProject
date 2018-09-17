@@ -14,7 +14,7 @@
       </div>
       <ticket-info v-show="ticketShow"></ticket-info>
     </div>
-    <list-more></list-more>
+    <list-more>查看剩余内容 &#xe62e;</list-more>
   </div>
 </template>
 
