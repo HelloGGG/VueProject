@@ -9,6 +9,7 @@
         <div class="mask"></div>
         <div class="backto iconfont"
             @click.stop="handleBackClick"
+            v-show="backShow"
         >&#xe624;</div>
     </router-link>
     <gallery
@@ -21,14 +22,17 @@
 
 <script>
 import Gallery from 'common/Gallery'
+import DetailHeader from './DetailHeader'
 export default {
   name: 'DetailBanner',
   components: {
-    Gallery
+    Gallery,
+    DetailHeader
   },
   data () {
     return {
       show: false,
+      backShow: true,
       imgs: [
         'http://img1.qunarzz.com/sight/p0/1603/5d/5dd523afbdbb037c90.water.jpg_r_800x800_181ae7c9.jpg',
         'http://img1.qunarzz.com/sight/p0/1412/af/03f05e00b14e2ba10bee9acb6fd6ef71.water.jpg_r_800x800_00da32fc.jpg'
@@ -44,7 +48,14 @@ export default {
     },
     handleBackClick () {
       this.$router.push('/')
+    },
+    handleScroll () {
+      let top = document.documentElement.scrollTop
+      this.backShow = top <= 0
     }
+  },
+  activated () {
+    window.addEventListener('scroll', this.handleScroll)
   }
 }
 </script>

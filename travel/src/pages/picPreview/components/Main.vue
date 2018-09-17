@@ -46,6 +46,7 @@ export default {
 
 <style lang="stylus" scoped>
   .main
+    position: relative
     display: flex
     flex-flow: row wrap
     box-sizing: border-box
@@ -53,6 +54,8 @@ export default {
     width: 100%
     padding: .1rem
     z-index: 1
+    top: .88rem
+    overflow: hidden
     .pic-box
       display: block
       box-sizing: border-box

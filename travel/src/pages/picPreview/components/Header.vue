@@ -20,12 +20,16 @@ export default {
 
 <style lang="stylus" scoped>
   .header
+    position: fixed
+    left: 0
+    right: 0
     font-size: .32rem
     text-align: center
     color: #333
     width: 100%
     height: .88rem
     z-index: 100
+    background: #fff
     .header-title
       width: 100%
       text-align: center
