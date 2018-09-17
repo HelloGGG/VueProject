@@ -4,24 +4,24 @@
     <detail-banner></detail-banner>
     <detail-brief-info></detail-brief-info>
     <detail-recommand></detail-recommand>
-    <!-- <detail-list :list="list"></detail-list> -->
+    <detail-ticket></detail-ticket>
   </div>
 </template>
 
 <script>
 import DetailBanner from './components/DetailBanner'
 import DetailHeader from './components/DetailHeader'
-import DetailList from './components/DetailList'
 import DetailBriefInfo from './components/DetailBriefInfo'
 import DetailRecommand from './components/DetailRecommand'
+import DetailTicket from './components/DetailTicket'
 export default {
   name: 'Detail',
   components: {
     DetailBanner,
     DetailHeader,
-    DetailList,
     DetailBriefInfo,
-    DetailRecommand
+    DetailRecommand,
+    DetailTicket
   },
   data () {
     return {

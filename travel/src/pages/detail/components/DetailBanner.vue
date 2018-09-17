@@ -52,7 +52,6 @@ export default {
     handleScroll () {
       let top = document.documentElement.scrollTop
       this.backShow = top <= 0
-      console.log('xxxx')
     }
   },
   activated () {
