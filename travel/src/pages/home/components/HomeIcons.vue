@@ -54,6 +54,7 @@ export default {
   .icons
     overflow: hidden
     margin-top: 0.2rem
+    background: #fff
     .icon-warpper
       width: 25%
       img
