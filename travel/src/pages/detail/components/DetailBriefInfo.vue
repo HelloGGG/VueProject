@@ -15,16 +15,16 @@
         <div class="arrow-r iconfont custom_c">&#xe62d;</div>
       </div>
     </div>
-    <div class="address border-bottom"><span class="iconfont custom_c">&#xe6d1;</span> 
+    <div class="address"><span class="iconfont custom_c">&#xe6d1;</span>
     浙江省嘉兴市桐乡市乌镇石佛南路18号
     <div class="arrow-r iconfont custom_c">&#xe62d;</div>
     </div>
-  </div>  
+  </div>
 </template>
 
 <script>
 export default {
-  
+  name: 'DetailBriefIndo'
 }
 </script>
 
@@ -42,7 +42,7 @@ export default {
     border-radius: .2rem .2rem 0 0
     padding: .1rem
     margin-top: -.1rem
-    z-index: 10
+    z-index: 5
     background: #fff
     .info
       .info-sorce, .info-intro
