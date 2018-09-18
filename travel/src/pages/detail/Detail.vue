@@ -16,7 +16,7 @@ import DetailHeader from './components/DetailHeader'
 import DetailBriefInfo from './components/DetailBriefInfo'
 import DetailRecommand from './components/DetailRecommand'
 import DetailTicket from './components/DetailTicket'
-import DetailComment from './components/DetailComment.vue'
+import DetailComment from './components/DetailComment'
 import DetailBook from './components/DetailBook'
 export default {
   name: 'Detail',

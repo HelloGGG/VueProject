@@ -8,6 +8,7 @@
         <span class="iconfont" @click="handleDownClick" v-show="ticketShow">起 &#xe62c;</span>
       </div>
       <ticket-info
+      class="custom-bg"
       v-show="ticketShow"
       v-for="ritem in recommandList"
       :key="ritem.id"
@@ -45,12 +46,18 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
+  @import '~styles/minx.styl'
+  .custom-bg
+    background: #f5f5f5
   .ticket-item
     position: relative
     line-height: .88rem
     font-size: .3rem
+    background: #fff
     .ticket-name
+      margin-right: 1.8rem
       padding: 0 .2rem
+      ellipsis()
     .ticket-price
       position: absolute
       top: 0

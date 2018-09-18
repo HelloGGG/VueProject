@@ -3,25 +3,26 @@
     <div class="content border-bottom">
       <div class="starlevel-datetime">
           <div class="starlevel">
-            <span class="good iconfont" ref="good">&#xe642;&#xe642;&#xe642;
-                <span class="bad iconfont" ref="bad">&#xe642;</span>
-            </span>
+            <span class="good iconfont" ref="good"></span>
+            <span class="bad iconfont" ref="bad"></span>
           </div>
           <div class="datetime">{{user.name}}&nbsp;&nbsp;{{user.date}}</div>
       </div>
-      <div class="words" :class="{intercept: isActive }">
+      <div class="words" :class="{intercept: isActive }" ref="words">
         {{user.words}}
       </div>
-      <list-more class="listmore-custom"
+      <div v-if="isControl">
+         <list-more class="listmore-custom"
         v-show="listmodeShow"
         @click.native="handleListMoreClick"
-      >&#xe62c;
-      </list-more>
-      <list-more class="listmore-custom"
-        v-show="!listmodeShow"
-        @click.native="handleListMoreClick"
-      >&#xe62e;
-      </list-more>
+        >&#xe62c;
+        </list-more>
+        <list-more class="listmore-custom"
+          v-show="!listmodeShow"
+          @click.native="handleListMoreClick"
+        >&#xe62e;
+        </list-more>
+      </div>
       <div class="pic-display">
         <div class="pic-wrap"
         @click="handleImgClick(index)"
@@ -31,12 +32,11 @@
           <img :src="item" alt="">
         </div>
       </div>
-    </div>
-    <list-more>查看全部评论 &#xe62d;</list-more>
-    <gallery :imgs="originImgs"
-        v-if="galleryShow"
-        @close="handleClose"
-    ></gallery>
+      </div>
+      <gallery :imgs="originImgs"
+          v-if="galleryShow"
+          @close="handleClose"
+      ></gallery>
     </div>
 </template>
 
@@ -49,22 +49,22 @@ export default {
     user: Object
   },
   name: 'Comment',
-   components: {
+  components: {
     ListMore,
     Gallery
   },
   data () {
     return {
       listmodeShow: false,
-      isActive: true,
-      galleryShow: false,
+      isActive: false,
+      isControl: false,
+      galleryShow: false
     }
   },
   computed: {
     originImgs () {
       var newImgs = []
       var arr = [...this.user.imgs]
-      console.log(this.imgs)
       arr.forEach((value, index) => {
         newImgs.push(value.replace(/_228x168_.+?\.jpg/, ''))
       })
@@ -89,14 +89,17 @@ export default {
   mounted () {
     var gContent = ''
     var bContent = ''
-    for (let i = 0; i < user.stars; i ++) {
+    for (let i = 0; i < this.user.stars; i++) {
       gContent += '&#xe642;'
     }
-     for (let i = 0; i < 5 - user.stars; i ++) {
+    for (let i = 0; i < 5 - this.user.stars; i++) {
       bContent += '&#xe642;'
     }
-    this.$refs.good.$el.innerHTML = gContent
-    this.$refs.bad.$el.innerHTML = bContent
+    // 页面元素挂载时初始化操作
+    this.$refs.good.innerHTML = gContent
+    this.$refs.bad.innerHTML = bContent
+    this.isControl = this.$refs.words.offsetHeight > 105
+    this.isActive = this.isControl
   }
 }
 </script>
@@ -104,7 +107,7 @@ export default {
 <style lang="stylus" scoped>
   .intercept
     overflow: hidden
-    height: 2.1rem
+    max-height: 2.1rem
   .listmore-custom
     line-height: .48rem
   .good
@@ -112,11 +115,13 @@ export default {
     margin: 0
     font-size: 0.05rem
   .bad
+    position: relative
     color: #ddd
     margin: 0
     font-size: 0.1rem
+    right: .08rem
   .content
-  padding: .1rem .2rem .4rem .2rem
+    padding: .1rem .2rem .4rem .2rem
   .starlevel-datetime
     position: relative
     line-height: .6rem

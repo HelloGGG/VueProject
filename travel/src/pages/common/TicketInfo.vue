@@ -56,6 +56,7 @@ export default {
     .title
       font-size: .3rem
       line-height: .52rem
+      margin-right: 1.8rem
     .can-buy
       font-size: .24rem
       line-height: .32rem
