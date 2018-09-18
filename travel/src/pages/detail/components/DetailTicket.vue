@@ -4,37 +4,66 @@
       <span class="ticket-icon"></span>
         西栅
     </div>
-    <div class="ticket-item">
-      <div class="ticket-name">嘉兴乌镇西栅大门票</div>
-      <div class="ticket-price">
-        <span class="symbo">¥</span>
-        165
-        <span class="iconfont" @click="handleDownClick" v-show="!ticketShow">起 &#xe62e;</span>
-        <span class="iconfont" @click="handleDownClick" v-show="ticketShow">起 &#xe62c;</span>
-      </div>
-      <ticket-info v-show="ticketShow"></ticket-info>
-    </div>
-    <list-more>查看剩余内容 &#xe62e;</list-more>
+    <ticket
+      v-for="item in ticketList"
+      :item="item"
+      :key="item.id"
+      :recommandList="recommandList">
+    </ticket>
+    <list-more @click.native="handleListMoreClick">查看剩余内容 &#xe62e;</list-more>
   </div>
 </template>
 
 <script>
 import ListMore from 'common/ListMore'
-import TicketInfo from 'common/TicketInfo'
+import Ticket from './Ticket'
 export default {
   name: 'DetailTicket',
   data () {
     return {
-      ticketShow: false
+      ticketShow: false,
+      ticketList: [
+        {
+          id: '0001',
+          title: '[周末]嘉兴乌镇西栅成人票',
+          price: '165'
+        }, {
+          id: '0002',
+          title: '[平日]嘉兴乌镇西栅成人票',
+          price: '150'
+        }, {
+          id: '0003',
+          title: '嘉兴乌镇西栅亲子票(1大1小)',
+          price: '198'
+        }
+      ],
+      recommandList: [
+        {
+          id: '001',
+          title: '嘉兴乌镇东栅+西栅大门票',
+          time: '23:45前可订明日',
+          tags: ['自营', '无需换票', '条件退'],
+          price: '200'
+        }, {
+          id: '002',
+          title: '嘉兴乌镇西栅大门票',
+          time: '23:30前可订明日',
+          tags: ['自营', '条件退'],
+          price: '150'
+        }
+      ]
     }
   },
   components: {
     ListMore,
-    TicketInfo
+    Ticket
   },
   methods: {
     handleDownClick () {
       this.ticketShow = !this.ticketShow
+    },
+    handleListMoreClick () {
+      console.log('more')
     }
   }
 }
@@ -58,20 +87,4 @@ export default {
       background: url(http://s.qunarzz.com/piao/image/touch/sight/detail.png) 0 -.45rem no-repeat;
       margin-right: .05rem;
       background-size: .4rem 3rem;
-  .ticket-item
-    position: relative
-    line-height: .88rem
-    font-size: .3rem
-    .ticket-name
-      padding: 0 .2rem
-    .ticket-price
-      position: absolute
-      top: 0
-      right: .2rem
-      font-size: .4rem
-      color: #ff9800
-      span
-        font-size: .24rem
-      span:nth-child(2), span:nth-child(3)
-        color: #9e9e9e
 </style>

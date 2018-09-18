@@ -25,7 +25,8 @@ export default {
           type: 'fraction'
         },
         observeParents: true,
-        observer: true
+        observer: true,
+        autoHeight: true
       }
     }
   },

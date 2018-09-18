@@ -1,16 +1,22 @@
 <template>
     <div class="ticket border-bottom">
-      <div class="title">嘉兴乌镇东栅大门票</div>
+      <div class="title"><slot name="title"></slot></div>
       <div class="can-buy">
         <span class="iconfont time-icon">&#xe675;</span>
-        23:45前可订明日
+        <slot name="time"></slot>
       </div>
       <div class="tips">
-        <div class="tip">自营</div>
-        <div class="tip">条件退</div>
+        <div
+        class="tip"
+        v-for="(tag, index) in tags"
+        :key="index"
+        @click="handleTipClick"
+        >
+        {{tag}}
+        </div>
       </div>
       <div class="price-book">
-        <div class="price"><span>¥</span>200</div>
+        <div class="price"><span>¥</span><slot name="price"></slot></div>
         <div class="book" @click="handleBookClick">预定</div>
       </div>
     </div>
@@ -19,10 +25,16 @@
 <script>
 import { mapMutations } from 'vuex'
 export default {
+  props: {
+    tags: Array
+  },
   name: 'TicketInfo',
   methods: {
     handleBookClick () {
       this.showMask(true)
+    },
+    handleTipClick () {
+      console.log('handleTipClick')
     },
     ...mapMutations(['showMask'])
   }

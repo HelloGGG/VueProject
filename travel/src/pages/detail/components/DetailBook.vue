@@ -6,22 +6,14 @@
       <div class="b-price"><span>¥ </span><span class="emphasize">200</span> /张</div>
       <div class="b-calendar">价格日历</div>
       <div class="calendar-tags">
-        <div class="tag">
-          <div class="day disabled">今天</div>
-          <div class="specific">9月18号</div>
-        </div>
-        <div class="tag">
-          <div class="day">今天</div>
-          <div class="specific">9月18号</div>
-        </div>
-        <div class="tag">
-          <div class="day">今天</div>
-          <div class="specific">9月18号</div>
-        </div>
-        <div class="tag">
-          <div class="day">今天</div>
-          <div class="specific">9月18号</div>
-        </div>
+        <day-tag v-for="(item, index) in days" :key="index"
+          :class="{disabled: !item.canBuy}"
+          ref="tag"
+          @click.native="handleDayClick(index)"
+        >
+          <template slot="day">{{item.name}}</template>
+          <template slot="specific">{{item.day}}</template>
+        </day-tag>
       </div>
       <div class="tip-info">需要在游玩前1天的23:45前预订</div>
       <div class="btn-book" @click="hanldeBookClick">立即预定</div>
@@ -31,9 +23,24 @@
 </template>
 
 <script>
+import DayTag from 'common/DayTag'
 import { mapState, mapMutations } from 'vuex'
 export default {
+  props: {
+    days: Array
+  },
   name: 'DetailBook',
+  components: {
+    DayTag
+  },
+  data () {
+    return {
+      isActived0: true,
+      isActived1: false,
+      isActived2: false,
+      isActived: false
+    }
+  },
   computed: {
     ...mapState(['isShowMask'])
   },
@@ -44,6 +51,14 @@ export default {
     hanldeBookClick () {
       this.showMask(true)
     },
+    handleDayClick (index) {
+      for (let i = 0; i < this.days.length; i++) {
+        var tagEle = this.$refs.tag[i].$el
+        if (!tagEle.classList.contains('disabled')) {
+          i === index ? tagEle.classList.add('actived') : tagEle.classList.remove('actived')
+        }
+      }
+    },
     ...mapMutations(['showMask'])
   }
 }
@@ -51,6 +66,14 @@ export default {
 
 <style lang='stylus' scoped>
   @import '~styles/variable.styl'
+  .disabled
+    color: #9e9e9e !important
+    opacity: 0.4
+  .actived
+    background: $bg
+    color: #fff !important
+  .acti
+    color: #fff !important
   .b-mask
     position: fixed
     top: 0
@@ -89,20 +112,6 @@ export default {
       display: flex
       flex-flow: row nowrap
       justify-content: space-between
-      .tag
-        box-sizing: border-box
-        width: 24%
-        padding: .1rem
-        text-align: center
-        border-radius: .1rem
-        border: .02rem solid #bdbdbd;
-        .day
-          line-height: .36rem
-          font-size: .28rem
-          padding-top: .08rem
-          .specific
-            line-height: .32rem
-            font-size: .24rem
     .tip-info
       padding: .14rem 0
       line-height: .36rem

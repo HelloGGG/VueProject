@@ -9,6 +9,6 @@ try {
 
 export default {
   city: defaultCity,
-  currentPic: 1,
+  currentPic: 0,
   isShowMask: false
 }

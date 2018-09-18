@@ -6,7 +6,7 @@
     <detail-recommand></detail-recommand>
     <detail-ticket></detail-ticket>
     <detail-comment></detail-comment>
-    <detail-book></detail-book>
+    <detail-book :days="days"></detail-book>
   </div>
 </template>
 
@@ -16,7 +16,7 @@ import DetailHeader from './components/DetailHeader'
 import DetailBriefInfo from './components/DetailBriefInfo'
 import DetailRecommand from './components/DetailRecommand'
 import DetailTicket from './components/DetailTicket'
-import DetailComment from './components/DetailComment'
+import DetailComment from './components/DetailComment.vue'
 import DetailBook from './components/DetailBook'
 export default {
   name: 'Detail',
@@ -46,6 +46,25 @@ export default {
           title: '儿童票'
         }, {
           title: '团体票'
+        }
+      ],
+      days: [
+        {
+          canBuy: false,
+          name: '今天',
+          day: '9月18日'
+        }, {
+          canBuy: true,
+          name: '明天',
+          day: '9月19日'
+        }, {
+          canBuy: true,
+          name: '后天',
+          day: '9月20日'
+        }, {
+          canBuy: true,
+          name: '其他日子',
+          day: ''
         }
       ]
     }
