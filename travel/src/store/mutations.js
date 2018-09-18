@@ -10,5 +10,8 @@ export default {
   },
   changeCurrentPic (state, currentPic) {
     state.currentPic = currentPic
+  },
+  showMask (state, isShowMask) {
+    state.isShowMask = isShowMask
   }
 }

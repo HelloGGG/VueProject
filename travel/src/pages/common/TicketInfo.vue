@@ -11,14 +11,21 @@
       </div>
       <div class="price-book">
         <div class="price"><span>¥</span>200</div>
-        <div class="book">预定</div>
+        <div class="book" @click="handleBookClick">预定</div>
       </div>
     </div>
 </template>
 
 <script>
+import { mapMutations } from 'vuex'
 export default {
-  name: 'TicketInfo'
+  name: 'TicketInfo',
+  methods: {
+    handleBookClick () {
+      this.showMask(true)
+    },
+    ...mapMutations(['showMask'])
+  }
 }
 </script>
 
