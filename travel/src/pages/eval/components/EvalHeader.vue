@@ -1,26 +1,29 @@
 <template>
-  <div class="header">
-    <div class="h-left"></div>
-    <div class="h-raiders"
-      :class="{active: isSliderShow}"
-      @click="handleClick"
-      >攻略
-      <div
-        class="tab-slider"
-        :class="{toright: !isSliderShow}"
-        ></div>
+  <div>
+    <div class="header">
+      <div class="h-left"></div>
+      <div class="h-raiders"
+        :class="{active: isSliderShow}"
+        @click="handleClick"
+        >攻略
+        <div
+          class="tab-slider"
+          :class="{toright: !isSliderShow}"
+          ></div>
+      </div>
+      <div class="h-comment"
+        :class="{active: !isSliderShow}"
+        @click="handleClick"
+      >点评
+      </div>
+      <div class="h-right"></div>
+      <router-link
+        tag="div"
+        class="iconfont icon-backto"
+        to="/detail/:id"
+        >&#xe624;</router-link>
     </div>
-    <div class="h-comment"
-      :class="{active: !isSliderShow}"
-      @click="handleClick"
-    >点评
-    </div>
-    <div class="h-right"></div>
-    <router-link
-      tag="div"
-      class="iconfont icon-backto"
-      to="/detail/:id"
-      >&#xe624;</router-link>
+    <div class="h-main"></div>
   </div>
 </template>
 
@@ -46,8 +49,12 @@ export default {
     color: $bg
   .toright
     left: 2.62rem !important
+  .h-main
+    height: .88rem
   .header
-    position: relative
+    position: fixed
+    right: 0
+    left: 0
     display: flex
     line-height: .88rem
     height: .88rem
@@ -55,6 +62,7 @@ export default {
     flex-flow: row nowrap
     font-size: .36rem
     text-align: center
+    z-index: 100
     .h-left, .h-right
       flex: 1
     .h-raiders, .h-comment
