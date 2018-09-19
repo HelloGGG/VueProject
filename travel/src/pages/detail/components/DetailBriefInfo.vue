@@ -1,14 +1,17 @@
 <template>
   <div class="container">
     <div class="info">
-      <div class="info-sorce border-rightbottom">
+      <router-link tag="div"
+        class="info-sorce border-rightbottom"
+        to="/evaluation"
+        >
         <div class="top">
           <span class="num">4.9</span>
           分 很棒
         </div>
         <div class="bottom">12924评论  66条攻略</div>
         <div class="arrow-r iconfont custom_c">&#xe62d;</div>
-      </div>
+      </router-link>
       <div class="info-intro  border-bottom">
         <div class="top">景点简介</div>
         <div class="bottom">开放时间/贴士</div>
