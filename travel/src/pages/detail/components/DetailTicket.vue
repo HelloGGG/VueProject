@@ -5,12 +5,13 @@
         西栅
     </div>
     <ticket
-      v-for="item in ticketList"
+      v-for="(item, index) in ticketList"
       :item="item"
       :key="item.id"
+      v-show="index < ticketsCount"
       :recommandList="item.recommandList">
     </ticket>
-    <list-more @click.native="handleListMoreClick">查看剩余内容 &#xe62e;</list-more>
+    <list-more v-if="isExist" @click.native="handleListMoreClick">查看剩余内容 &#xe62e;</list-more>
   </div>
 </template>
 
@@ -18,10 +19,14 @@
 import ListMore from 'common/ListMore'
 import Ticket from './Ticket'
 export default {
+  props: {
+    isTicketMore: Boolean
+  },
   name: 'DetailTicket',
   data () {
     return {
       ticketShow: false,
+      isExist: true,
       ticketList: [
         {
           id: '0001',
@@ -89,12 +94,15 @@ export default {
     ListMore,
     Ticket
   },
+  computed: {
+    ticketsCount () {
+      return this.isTicketMore ? this.ticketList.length : 2
+    }
+  },
   methods: {
-    handleDownClick () {
-      this.ticketShow = !this.ticketShow
-    },
     handleListMoreClick () {
-      console.log('more')
+      this.$emit('ticketMore')
+      this.isExist = false
     }
   }
 }

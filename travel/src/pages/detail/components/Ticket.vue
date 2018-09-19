@@ -9,10 +9,10 @@
       </div>
       <ticket-info
       class="custom-bg"
-      v-show="ticketShow"
       v-for="ritem in recommandList"
       :key="ritem.id"
       :tags="ritem.tags"
+      v-show="ticketShow"
       >
         <template slot="title">{{ritem.title}}</template>
         <template slot="time">{{ritem.time}}</template>
@@ -26,7 +26,8 @@ import TicketInfo from 'common/TicketInfo'
 export default {
   props: {
     item: Object,
-    recommandList: Array
+    recommandList: Array,
+    isTicketMore: Boolean
   },
   components: {
     TicketInfo

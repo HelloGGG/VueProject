@@ -4,7 +4,7 @@
     <detail-banner></detail-banner>
     <detail-brief-info></detail-brief-info>
     <detail-recommand></detail-recommand>
-    <detail-ticket></detail-ticket>
+    <detail-ticket @ticketMore="handleTicketMore" :isTicketMore="isTicketMore"></detail-ticket>
     <detail-comment></detail-comment>
     <detail-book :days="days"></detail-book>
   </div>
@@ -31,6 +31,7 @@ export default {
   },
   data () {
     return {
+      isTicketMore: false,
       list: [
         {
           title: '成人票',
@@ -67,6 +68,11 @@ export default {
           day: ''
         }
       ]
+    }
+  },
+  methods: {
+    handleTicketMore () {
+      this.isTicketMore = true
     }
   }
 }
