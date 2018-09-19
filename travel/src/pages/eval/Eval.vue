@@ -1,31 +1,36 @@
 <template>
   <div>
-    <eval-header></eval-header>
-    <eval-main
+    <eval-header @changeContent="handleChangeContent"></eval-header>
+    <eval-main-plan
       v-for="user in users"
       :key="user.id"
       :user="user"
-    ></eval-main>
+      v-show="isShowPlan"
+    ></eval-main-plan>
     <div
     class="top-wrapper"
     @click="handleTopClick"
     v-show="isTopShow"
     ><div class="iconfont toTop">&#xe635;</div></div>
+    <eval-main-comment></eval-main-comment>
   </div>
 </template>
 
 <script>
 import EvalHeader from './components/EvalHeader'
-import EvalMain from './components/EvalMain'
+import EvalMainPlan from './components/EvalMainPlan'
+import EvalMainComment from './components/EvalMainComment'
 export default {
   name: 'Eval',
   components: {
     EvalHeader,
-    EvalMain
+    EvalMainPlan,
+    EvalMainComment
   },
   data () {
     return {
       isTopShow: false,
+      isShowPlan: true,
       users: [
         {
           id: '0001',
@@ -85,6 +90,9 @@ export default {
     handleScroll () {
       let top = document.documentElement.scrollTop
       this.isTopShow = top > 150
+    },
+    handleChangeContent (flag) {
+      this.isShowPlan = flag
     }
   },
   activated () {

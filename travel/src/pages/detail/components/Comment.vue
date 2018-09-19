@@ -105,6 +105,7 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
+  @import '~styles/minx.styl'
   .intercept
     overflow: hidden
     max-height: 2.1rem
@@ -131,11 +132,7 @@ export default {
     right: 0
     font-size: .24rem
   .words
-    line-height: .42rem
-    font-size: .26rem
-    color: #616161
-    word-break: break-all
-    word-wrap: break-word
+    comment()
   .pic-display
     display: flex
     flex-flow: row wrap

@@ -4,7 +4,7 @@
       <div class="h-left"></div>
       <div class="h-raiders"
         :class="{active: isSliderShow}"
-        @click="handleClick"
+        @click="handlePlanClick"
         >攻略
         <div
           class="tab-slider"
@@ -13,7 +13,7 @@
       </div>
       <div class="h-comment"
         :class="{active: !isSliderShow}"
-        @click="handleClick"
+        @click="handleCommentClick"
       >点评
       </div>
       <div class="h-right"></div>
@@ -36,8 +36,13 @@ export default {
     }
   },
   methods: {
-    handleClick () {
-      this.isSliderShow = !this.isSliderShow
+    handlePlanClick () {
+      this.isSliderShow = true
+      this.$emit('changeContent', true)
+    },
+    handleCommentClick () {
+      this.isSliderShow = false
+      this.$emit('changeContent', false)
     }
   }
 }

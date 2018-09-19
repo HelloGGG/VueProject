@@ -42,7 +42,7 @@ export default {
   props: {
     user: Object
   },
-  name: 'EvalMain',
+  name: 'EvalMainPlan',
   components: {
     ListMore
   },
