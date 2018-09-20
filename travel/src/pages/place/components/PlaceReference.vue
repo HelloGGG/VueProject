@@ -1,6 +1,6 @@
 <template>
     <div class="ref-wrapper">
-      <div class="ref-title border-bottom">入园参考</div>
+      <place-title>入园参考</place-title>
       <div class="condion-wrapper"
           ref="words"
           :class="{intercept: isActive }"
@@ -28,16 +28,18 @@
         v-show="!listmodeShow"
         @click.native="handleListMoreClick"
       >查看更多 &#xe62e;</list-more>
-      <div class="ref-margin"></div>
+      <div class="c-margin"></div>
     </div>
 </template>
 
 <script>
+import PlaceTitle from './PlaceTitle'
 import ListMore from 'common/ListMore'
 export default {
   name: 'PlaceReference',
   components: {
-    ListMore
+    ListMore,
+    PlaceTitle
   },
   data () {
     return {
@@ -63,10 +65,8 @@ export default {
 <style lang="stylus" scoped>
   @import '~styles/variable.styl'
   @import '~styles/minx.styl'
-  .ref-margin
-    height: .22rem
-    width: 100%
-    background: #f5f5f5
+  .c-margin
+    componentMargin()
   .intercept
     overflow: hidden
     max-height: 1.5rem
@@ -75,25 +75,6 @@ export default {
   .ref-wrapper
     box-sizing: border-box
     background: #fff
-    .ref-title
-      position: relative
-      line-height: .88rem
-      padding: 0 .35rem
-      height: .88rem
-      font-weight: bold
-      color: #333
-      font-size: .3rem
-    .ref-title::after
-      position: absolute
-      top: .28rem
-      left: .22rem
-      display: inline
-      content: ''
-      background: $bg
-      height: .28rem
-      width: .05rem
-      line-height: .5rem
-      border-radius: .02rem
     .condition
       .condi-title
         line-height: .42rem
