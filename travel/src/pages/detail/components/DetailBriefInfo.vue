@@ -1,7 +1,8 @@
 <template>
   <div class="container">
     <div class="info">
-      <router-link tag="div"
+      <router-link
+        tag="div"
         class="info-sorce border-rightbottom"
         to="/evaluation"
         >
@@ -12,11 +13,11 @@
         <div class="bottom">12924评论  66条攻略</div>
         <div class="arrow-r iconfont custom_c">&#xe62d;</div>
       </router-link>
-      <div class="info-intro  border-bottom">
-        <div class="top">景点简介</div>
+      <router-link tag="div" to="/place/:id" class="info-intro  border-bottom">
+        <div class="top" >景点简介</div>
         <div class="bottom">开放时间/贴士</div>
         <div class="arrow-r iconfont custom_c">&#xe62d;</div>
-      </div>
+      </router-link>
     </div>
     <div class="address"><span class="iconfont custom_c">&#xe6d1;</span>
     浙江省嘉兴市桐乡市乌镇石佛南路18号

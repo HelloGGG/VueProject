@@ -5,6 +5,7 @@ import City from '@/pages/city/City'
 import Detail from '@/pages/detail/Detail'
 import PicPreview from '@/pages/picPreview/PicPreview'
 import Eval from '@/pages/eval/Eval'
+import Place from '@/pages/place/Place'
 Vue.use(Router)
 
 export default new Router({
@@ -29,6 +30,10 @@ export default new Router({
       path: '/evaluation',
       name: 'Eval',
       component: Eval
+    }, {
+      path: '/place/:id',
+      name: 'Place',
+      component: Place
     }
   ]
 })
