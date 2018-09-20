@@ -1,13 +1,16 @@
 <template>
   <div class="user-wrapper">
     <div class="name-stars">
-      <span class="u-name">娟*娟</span>
-      <span class="iconfont stars">&#xe642;&#xe642;&#xe642;&#xe642;&#xe642;</span>
+      <span class="u-name">{{user.name}}</span>
+      <div class="starlevel">
+        <span class="good iconfont" ref="good"></span>
+        <span class="bad iconfont" ref="bad"></span>
+      </div>
     </div>
-    <div class="date">2018-09-07</div>
-    <img class="avatar" src="http://img1.qunarzz.com/ucenter/headshot/201308/12/734e34abd3ea98c57c43c4d7.jpg"/>
+    <div class="date">{{user.date}}</div>
+    <img class="avatar" :src="user.avatar"/>
     <div class="words" :class="{intercept: isActive }" ref="words">
-      最主要是方便，如果想一天来回的话真的是很好的选择！纯玩，尽情的玩，尽情的拍！乌镇已经商业化了，没有我期待的静...所以我觉得一天也够了…现在国内哪都是人~~这不是乌镇一个地方的缺点，只要是景点都这样。此团唯一不好的是，早上集合时我多等了快一个小时，十点出发，导游们通知的都是9点，呜呜...我只是想多睡会，哈哈😄
+      {{user.words}}
     </div>
     <div v-if="isControl">
         <list-more class="listmore-custom"
@@ -22,52 +25,68 @@
       </list-more>
     </div>
     <div class="imgs-container">
-      <img  class="img" src="https://imgs.qunarzz.com/piao/fusion/1809/f8/3740cfbf50896502.jpg_240x240_7d7b0d6d.jpg" alt="">
-      <img  class="img" src="https://imgs.qunarzz.com/piao/fusion/1809/f8/3740cfbf50896502.jpg_240x240_7d7b0d6d.jpg" alt="">
-      <img  class="img" src="https://imgs.qunarzz.com/piao/fusion/1809/f8/3740cfbf50896502.jpg_240x240_7d7b0d6d.jpg" alt="">
-      <img  class="img" src="https://imgs.qunarzz.com/piao/fusion/1809/f8/3740cfbf50896502.jpg_240x240_7d7b0d6d.jpg" alt="">
-      <img  class="img" src="https://imgs.qunarzz.com/piao/fusion/1809/f8/3740cfbf50896502.jpg_240x240_7d7b0d6d.jpg" alt="">
-      <img  class="img" src="https://imgs.qunarzz.com/piao/fusion/1809/f8/3740cfbf50896502.jpg_240x240_7d7b0d6d.jpg" alt="">
-      <img  class="img" src="https://imgs.qunarzz.com/piao/fusion/1809/f8/3740cfbf50896502.jpg_240x240_7d7b0d6d.jpg" alt="">
-      <img  class="img" src="https://imgs.qunarzz.com/piao/fusion/1809/f8/3740cfbf50896502.jpg_240x240_7d7b0d6d.jpg" alt="">
-      <img  class="img" src="https://imgs.qunarzz.com/piao/fusion/1809/f8/3740cfbf50896502.jpg_240x240_7d7b0d6d.jpg" alt="">
-      <img  class="img" src="https://imgs.qunarzz.com/piao/fusion/1809/f8/3740cfbf50896502.jpg_240x240_7d7b0d6d.jpg" alt="">
+      <img
+      v-for="(img, index) in user.imgs"
+      :key="index"
+      class="img"
+      :src="img"
+      @click="handleImgClick(index)"
+      >
     </div>
+    <gallery :imgs="user.imgs"
+          v-if="galleryShow"
+          @close="handleClose"
+    ></gallery>
   </div>
 </template>
 
 <script>
+import { mapMutations } from 'vuex'
 import ListMore from 'common/ListMore'
+import Gallery from 'common/Gallery'
 export default {
+  props: {
+    user: Object
+  },
   name: 'UserComm',
   components: {
-    ListMore
+    ListMore,
+    Gallery
   },
   data () {
     return {
       listmodeShow: false,
       isActive: false,
-      isControl: false
+      isControl: false,
+      galleryShow: false
     }
   },
   methods: {
     handleListMoreClick () {
       this.isActive = !this.isActive
       this.listmodeShow = !this.listmodeShow
-    }
+    },
+    handleImgClick (index) {
+      this.galleryShow = true
+      this.changeCurrentPic(index)
+      console.log(this.originImgs)
+    },
+    handleClose () {
+      this.galleryShow = false
+    },
+    ...mapMutations(['changeCurrentPic'])
   },
   mounted () {
-    // var gContent = ''
-    // var bContent = ''
-    // for (let i = 0; i < this.user.stars; i++) {
-    //   gContent += '&#xe642;'
-    // }
-    // for (let i = 0; i < 5 - this.user.stars; i++) {
-    //   bContent += '&#xe642;'
-    // }
-    // // 页面元素挂载时初始化操作
-    // this.$refs.good.innerHTML = gContent
-    // this.$refs.bad.innerHTML = bContent
+    var gContent = ''
+    var bContent = ''
+    for (let i = 0; i < this.user.stars; i++) {
+      gContent += '&#xe642;'
+    }
+    for (let i = 0; i < 5 - this.user.stars; i++) {
+      bContent += '&#xe642;'
+    }
+    this.$refs.good.innerHTML = gContent
+    this.$refs.bad.innerHTML = bContent
     this.isControl = this.$refs.words.offsetHeight > 105
     this.isActive = this.isControl
   }
@@ -76,11 +95,21 @@ export default {
 
 <style lang="stylus" scoped>
   @import '~styles/minx.styl'
+  .good
+    color: #ffb436
+    margin: 0
+    font-size: 0.2rem
+  .bad
+    position: relative
+    color: #ddd
+    margin: 0
+    font-size: 0.2rem
+    right: .08rem
   .listmore-custom
     line-height: .5rem !important
   .intercept
     overflow: hidden
-    max-height: 2.1rem
+    max-height: 1.65rem
   .user-wrapper
     position: relative
     padding: .3rem
@@ -89,7 +118,8 @@ export default {
       padding-left: 1rem
       color: #9e9e9e
       font-size: .2rem !important
-      .stars
+      .starlevel
+        display: inline-block
         margin-left: .2rem
         color: #ffb436
         font-size: .2rem

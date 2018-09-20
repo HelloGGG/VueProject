@@ -5,14 +5,27 @@
       v-for="user in users"
       :key="user.id"
       :user="user"
-      v-show="isShowPlan"
+      v-if="isShowPlan"
     ></eval-main-plan>
+    <eval-main-comment
+      :users="users"
+      v-if="!isShowPlan"
+    ></eval-main-comment>
     <div
-    class="top-wrapper"
-    @click="handleTopClick"
-    v-show="isTopShow"
+      class="top-wrapper"
+      @click="handleTopClick"
+      v-show="isTopShow"
     ><div class="iconfont toTop">&#xe635;</div></div>
-    <eval-main-comment></eval-main-comment>
+    <div
+      v-show="!isShowPlan"
+      :class="{originWrapper: isOrigin, circleWrapper: !isOrigin}"
+      @click="handleCommentClick"
+    >
+    <div
+      ref="toComment"
+      :class="{origin: isOrigin, circle: !isOrigin, animated:!isOrigin, jello:!isOrigin, 'delay-1s': !isOrigin}"
+    >写点评</div>
+    </div>
   </div>
 </template>
 
@@ -29,6 +42,7 @@ export default {
   },
   data () {
     return {
+      isOrigin: true,
       isTopShow: false,
       isShowPlan: true,
       users: [
@@ -90,9 +104,19 @@ export default {
     handleScroll () {
       let top = document.documentElement.scrollTop
       this.isTopShow = top > 150
+      if (top === 0) {
+        this.isOrigin = true
+        this.$refs.toComment.innerText = '写点评'
+      } else {
+        this.isOrigin = false
+        this.$refs.toComment.innerText = '点评'
+      }
     },
     handleChangeContent (flag) {
       this.isShowPlan = flag
+    },
+    handleCommentClick () {
+      console.log('commmit')
     }
   },
   activated () {
@@ -106,20 +130,54 @@ export default {
 
 <style lang="stylus" scoped>
   @import '~styles/variable.styl'
-  .top-wrapper
+  .originWrapper
+    box-sizing: border-box
     position: fixed
     display: flex
     align-items: center
     justify-content: center
-    bottom: 1.5rem
+    bottom: 0
+    right: 0
+    background: #fff
+    line-height: 1rem
+    height: 1rem
+    padding: 0 .2rem
+    width: 100%
+    .origin
+      width: 100%
+      height: .72rem
+      line-height: .72rem
+      background: $bg
+      color: #fff
+      text-align: center
+  .top-wrapper, .circleWrapper
+    position: fixed
+    display: flex
+    align-items: center
+    justify-content: center
+    bottom: 1.38rem
     right: .2rem
     background: #fff
     line-height: 1rem
     width: 1rem
+    height: 1rem
     border-radius: .5rem
     .toTop
-      font-size: .8rem
       border-radius: .4rem
       color: $bg
       z-index: 100
+      font-size: .8rem
+    .circle
+      background: $bg
+      color: #fff
+      width: .8rem
+      height: .8rem
+      line-height: .8rem
+      text-align: center
+      border-radius: .4rem
+      font-size: .24rem
+  .circleWrapper
+    background: #fff
+    bottom: .3rem
+    transition: all 1s
 </style>

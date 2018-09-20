@@ -6,7 +6,9 @@
         :key="user.id"
         :user="user"
       ></comment>
-      <list-more>查看全部评论 &#xe62d;</list-more>
+      <router-link to="/evaluation">
+        <list-more>查看全部评论 &#xe62d;</list-more>
+      </router-link>
   </div>
 </template>
 

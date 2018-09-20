@@ -83,12 +83,12 @@ export default {
   .good
     color: #ffb436
     margin: 0
-    font-size: 0.05rem
+    font-size: 0.2rem
   .bad
     position: relative
     color: #ddd
     margin: 0
-    font-size: 0.1rem
+    font-size: 0.2rem
     right: .08rem
   .intercept
     overflow: hidden

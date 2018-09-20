@@ -7,7 +7,7 @@
     </div>
     <ul class="eval-tags"
       ref="tags"
-      :class="{intercept: isActive }"
+      :class="{intercept: isActive}"
       >
       <li class="tag"
       v-for="(item, index) in tags"
@@ -28,7 +28,10 @@
       >&#xe62e;
       </list-more>
     </div>
-    <user-comm></user-comm>
+    <user-comm v-for="user in users"
+     :key="user.id"
+     :user="user"
+    ></user-comm>
   </div>
 </template>
 
@@ -36,6 +39,9 @@
 import ListMore from 'common/ListMore'
 import UserComm from './UserComm'
 export default {
+  props: {
+    users: Array
+  },
   name: 'EvalMainComment',
   data () {
     return {
@@ -54,9 +60,6 @@ export default {
         '江南水乡 956',
         '江南水乡 956',
         '江南水乡 956',
-        '江南水乡 956',
-        '江南水乡 956',
-        '江南水乡 956',
         '江南水乡 956'
       ]
     }
@@ -67,9 +70,9 @@ export default {
   },
   methods: {
     handleTagClick (index) {
-      var tags = this.$refs.tag
+      let tagsEl = this.$refs.tag
       for (let i = 0; i < this.tags.length; i++) {
-        i === index ? tags[i].classList.add('active') : tags[i].classList.remove('active')
+        i === index ? tagsEl[i].classList.add('active') : tagsEl[i].classList.remove('active')
       }
     },
     handleListMoreClick () {
@@ -79,17 +82,7 @@ export default {
   },
   mounted () {
     this.$refs.tag[0].classList.add('active')
-    // var gContent = ''
-    // var bContent = ''
-    // for (let i = 0; i < this.user.stars; i++) {
-    //   gContent += '&#xe642;'
-    // }
-    // for (let i = 0; i < 5 - this.user.stars; i++) {
-    //   bContent += '&#xe642;'
-    // }
-    // 页面元素挂载时初始化操作
-    // this.$refs.good.innerHTML = gContent
-    // this.$refs.bad.innerHTML = bContent
+    console.log(this.$refs.tags.offsetHeight)
     this.isControl = this.$refs.tags.offsetHeight > 84
     this.isActive = this.isControl
   }
