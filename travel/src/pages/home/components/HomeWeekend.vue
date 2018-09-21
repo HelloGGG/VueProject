@@ -6,7 +6,7 @@
         <img :src="item.imgUrl" alt="" class="pic">
       </div>
       <div class="info-box">
-        <p class="info">{{item.info}}</p>
+        <p class="info">{{item.name}}</p>
         <p class="desc">{{item.desc}}</p>
       </div>
     </div>

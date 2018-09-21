@@ -2,9 +2,9 @@
   <div class="icons border-bottom">
      <swiper :options="swiperOption">
       <swiper-slide v-for="(ls,index) in swiperSlides" :key="index">
-        <div class="icon-warpper" v-for="item in ls" :key="item.id">
+        <div class="icon-warpper" v-for="(item, index) in ls" :key="index">
           <img :src="item.iconUrl" alt="">
-          <p class="icon-desc">{{item.desc}}</p>
+          <p class="icon-desc">{{item.iconName}}</p>
         </div>
       </swiper-slide>
       <div class="swiper-pagination"  slot="pagination"></div>
@@ -53,7 +53,7 @@ export default {
     flex-flow: row wrap
   .icons
     overflow: hidden
-    margin-top: 0.2rem
+    padding: .2rem 0 .3rem 0
     background: #fff
     .icon-warpper
       width: 25%

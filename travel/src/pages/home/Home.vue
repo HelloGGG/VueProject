@@ -39,15 +39,16 @@ export default {
   },
   methods: {
     getHomeData () {
-      axios.get('/api/index.json?city=' + this.city).then(this.getHomeDataSucc)
+      axios.get('/api/home').then(this.getHomeDataSucc)
     },
     getHomeDataSucc (res) {
-      if (res.data.ret && res.data.data) {
-        const data = res.data.data
-        this.swiperList = data.swiperList
-        this.iconsList = data.iconsList
-        this.recommandList = data.recommandList
-        this.weekendList = data.weekendList
+      console.log(res)
+      if (res) {
+        const data = res.data
+        this.swiperList = data.swipers
+        this.iconsList = data.icons
+        this.recommandList = data.places
+        this.weekendList = data.weekendRecommand
       }
     }
   },

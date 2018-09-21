@@ -9,8 +9,8 @@
       >
         <img :src="item.imgUrl" alt="">
         <div class="info">
-          <p class="place">{{item.place}}</p>
-          <p class="comment">{{item.comment}}</p>
+          <p class="place">{{item.name}}</p>
+          <p class="comment">{{item.comments}}</p>
           <button class="btn-detail">查看详情</button>
         </div>
       </router-link>
