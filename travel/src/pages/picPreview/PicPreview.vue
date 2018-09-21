@@ -6,8 +6,8 @@
 </template>
 
 <script>
-import PreviewHeader from './components/Header'
-import PreviewMain from './components/Main'
+import PreviewHeader from './components/PreviewHeader'
+import PreviewMain from './components/PreviewMain'
 export default {
   name: 'PicPreview',
   components: {
