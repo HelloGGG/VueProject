@@ -5,13 +5,13 @@
         去哪儿推荐
     </div>
     <ticket-info
-      v-for="item in recommandList"
-      :key="item.id"
-      :tags="item.tags"
+      v-for="(item, index) in recomTickets"
+      :key="index"
+      :tags="item.labelIcons"
       >
       <template slot="title">{{item.title}}</template>
-      <template slot="time">{{item.time}}</template>
-      <template slot="price">{{item.price}}</template>
+      <template slot="time">{{item.desctag}}</template>
+      <template slot="price">{{item.specificPrice}}</template>
     </ticket-info>
   </div>
 </template>
@@ -19,24 +19,12 @@
 <script>
 import TicketInfo from 'common/TicketInfo'
 export default {
+  props: {
+    recomTickets: Array
+  },
   name: 'DetailRecommand',
   data () {
     return {
-      recommandList: [
-        {
-          id: '001',
-          title: '嘉兴乌镇东栅+西栅大门票',
-          time: '23:45前可订明日',
-          tags: ['自营', '无需换票', '条件退'],
-          price: '200'
-        }, {
-          id: '002',
-          title: '嘉兴乌镇西栅大门票',
-          time: '23:30前可订明日',
-          tags: ['自营', '条件退'],
-          price: '150'
-        }
-      ]
     }
   },
   components: {

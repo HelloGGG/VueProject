@@ -4,7 +4,9 @@
         <home-swiper :list="swiperList"></home-swiper>
         <home-icons :list="iconsList"></home-icons>
         <home-recommand :list="recommandList"></home-recommand>
-        <home-weekend :list="weekendList"></home-weekend>
+        <home-weekend
+          v-if="weekendList.length"
+          :list="weekendList"></home-weekend>
     </div>
 </template>
 
@@ -39,7 +41,7 @@ export default {
   },
   methods: {
     getHomeData () {
-      axios.get('/api/home').then(this.getHomeDataSucc)
+      axios.get('/api/home?city=' + this.city).then(this.getHomeDataSucc)
     },
     getHomeDataSucc (res) {
       console.log(res)

@@ -7,10 +7,10 @@
         to="/evaluation"
         >
         <div class="top">
-          <span class="num">4.9</span>
+          <span class="num">{{score}}</span>
           分 很棒
         </div>
-        <div class="bottom">12924评论  66条攻略</div>
+        <div class="bottom">{{comPlan}}</div>
         <div class="arrow-r iconfont custom_c">&#xe62d;</div>
       </router-link>
       <router-link tag="div" to="/place/:id" class="info-intro  border-bottom">
@@ -20,7 +20,7 @@
       </router-link>
     </div>
     <div class="address"><span class="iconfont custom_c">&#xe6d1;</span>
-    浙江省嘉兴市桐乡市乌镇石佛南路18号
+    {{location}}
     <div class="arrow-r iconfont custom_c">&#xe62d;</div>
     </div>
   </div>
@@ -28,11 +28,17 @@
 
 <script>
 export default {
+  props: {
+    score: String,
+    comPlan: String,
+    location: String
+  },
   name: 'DetailBriefIndo'
 }
 </script>
 
 <style lang="stylus" scoped>
+  @import '~styles/minx.styl'
   .custom_c
     color: #9e9e9e
   .arrow-r
@@ -77,6 +83,7 @@ export default {
       line-height: .76rem
       height: .76rem
       padding-left: .1rem
+      ellipsis()
       .arrow-r
         top: 0
 </style>

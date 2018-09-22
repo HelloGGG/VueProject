@@ -55,7 +55,7 @@ export default {
   },
   methods: {
     getCityData () {
-      axios.get('/api/cities.json').then(this.getCityDataSucc)
+      axios.get('/static/cities.json').then(this.getCityDataSucc)
     },
     getCityDataSucc (res) {
       console.log(res)
@@ -71,9 +71,9 @@ export default {
     handleChangeAjax (arg, isShow) {
       this.show = isShow
       if (arg) {
-        axios.get('/api/cities.json').then(this.getCityDataSucc)
+        axios.get('/static/cities.json').then(this.getCityDataSucc)
       } else {
-        axios.get('/api/foregin.json').then(this.getCityDataSucc)
+        axios.get('/static/foregin.json').then(this.getCityDataSucc)
       }
     },
     handleChangeList (arg) {

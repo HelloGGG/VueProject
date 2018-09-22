@@ -13,5 +13,9 @@ export default {
   },
   showMask (state, isShowMask) {
     state.isShowMask = isShowMask
+  },
+  changeDetail (state, detail) {
+    state.defaultSightId = detail.sid
+    state.defaultDetailUrl = detail.did
   }
 }

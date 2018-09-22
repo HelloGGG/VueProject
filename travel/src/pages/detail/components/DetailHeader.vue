@@ -5,12 +5,15 @@
     <router-link to="/">
       <div class="header-left iconfont">&#xe624;</div>
     </router-link>
-      景点名称
+      {{headerTitle}}
   </div>
 </template>
 
 <script>
 export default {
+  props: {
+    headerTitle: String
+  },
   name: 'DetailHeader',
   data () {
     return {

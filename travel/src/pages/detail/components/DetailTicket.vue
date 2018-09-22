@@ -1,18 +1,19 @@
 <template>
-  <div>
+<div>
+  <div v-for="(ticket, index) in tickets" :key="index">
     <div class="ticket-kind border-bottom">
       <span class="ticket-icon"></span>
-        西栅
+        {{ticket.bigName}}
     </div>
     <ticket
-      v-for="(item, index) in ticketList"
+      v-for="(item, index) in ticket.type"
       :item="item"
-      :key="item.id"
-      v-show="index < ticketsCount"
-      :recommandList="item.recommandList">
+      :key="index"
+      >
     </ticket>
-    <list-more v-if="isExist" @click.native="handleListMoreClick">查看剩余内容 &#xe62e;</list-more>
+    <div class="c-margin"></div>
   </div>
+</div>
 </template>
 
 <script>
@@ -20,74 +21,14 @@ import ListMore from 'common/ListMore'
 import Ticket from './Ticket'
 export default {
   props: {
-    isTicketMore: Boolean
+    isTicketMore: Boolean,
+    tickets: Array
   },
   name: 'DetailTicket',
   data () {
     return {
       ticketShow: false,
-      isExist: true,
-      ticketList: [
-        {
-          id: '0001',
-          title: '[周末]嘉兴乌镇西栅成人票',
-          price: '165',
-          recommandList: [
-            {
-              id: '001',
-              title: '嘉兴乌镇东栅+西栅大门票',
-              time: '23:45前可订明日',
-              tags: ['自营', '无需换票', '条件退'],
-              price: '165'
-            }, {
-              id: '002',
-              title: '嘉兴乌镇西栅大门票',
-              time: '23:30前可订明日',
-              tags: ['自营', '条件退'],
-              price: '150'
-            }
-          ]
-        }, {
-          id: '0002',
-          title: '[平日]嘉兴乌镇西栅成人票',
-          price: '155',
-          recommandList: [
-            {
-              id: '001',
-              title: '嘉兴乌镇东栅+西栅大门票',
-              time: '23:45前可订明日',
-              tags: ['自营', '无需换票', '条件退'],
-              price: '155'
-            }
-          ]
-        }, {
-          id: '0003',
-          title: '嘉兴乌镇西栅亲子票(1大1小)',
-          price: '198',
-          recommandList: [
-            {
-              id: '001',
-              title: '嘉兴乌镇西栅大门票',
-              time: '23:30前可订明日',
-              tags: ['自营', '条件退'],
-              price: '198'
-            }
-          ]
-        }, {
-          id: '0004',
-          title: '【刷码入园】乌镇西栅成人票（含电子导游）',
-          price: '135',
-          recommandList: [
-            {
-              id: '001',
-              title: '【刷身份证入园  电子票】乌镇东栅成人票+手机电子讲解',
-              time: '可订明日',
-              tags: ['无需换票', '条件退'],
-              price: '135'
-            }
-          ]
-        }
-      ]
+      isExist: true
     }
   },
   components: {
@@ -96,7 +37,7 @@ export default {
   },
   computed: {
     ticketsCount () {
-      return this.isTicketMore ? this.ticketList.length : 2
+      return this.isTicketMore ? this.tickets.type.length : 2
     }
   },
   methods: {
@@ -109,7 +50,10 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-  .ticket-kind
+ .c-margin
+   height: .2rem
+   background: #f5f5f5
+ .ticket-kind
     display: flex
     align-items: center
     width: 100%

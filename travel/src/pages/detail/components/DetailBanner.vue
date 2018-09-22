@@ -1,21 +1,25 @@
 <template>
   <div>
-    <router-link tag="div" class="banner" @click="handleBannerClick" to="/picPreview">
-        <img src="http://img1.qunarzz.com/sight/p0/1603/5d/5dd523afbdbb037c90.water.jpg_600x330_5349106d.jpg" alt="">
-        <div class="banner-info">
-          <div class="iconfont pic-num">&#xe600;<span>58</span></div>
-          <div class="place-name">乌镇(AAAAA景区)</div>
-        </div>
-        <div class="mask"></div>
-        <div class="backto iconfont"
-            @click.stop="handleBackClick"
-            v-show="backShow"
-        >&#xe624;</div>
+    <router-link
+      tag="div"
+      class="banner"
+      @click="handleBannerClick"
+      to="/picPreview"
+    >
+      <img :src="headerImg" alt="">
+      <div class="banner-info">
+        <div class="iconfont pic-num">&#xe600;<span>{{imgsNum}}</span></div>
+        <div class="place-name">{{describe}}</div>
+      </div>
+      <div class="mask"></div>
+      <div class="backto iconfont"
+          @click.stop="handleBackClick"
+          v-show="backShow"
+      >&#xe624;</div>
     </router-link>
     <gallery
       @close="handleClose"
       v-show="show"
-      :imgs="imgs"
     ></gallery>
   </div>
 </template>
@@ -24,6 +28,11 @@
 import Gallery from 'common/Gallery'
 import DetailHeader from './DetailHeader'
 export default {
+  props: {
+    imgsNum: String,
+    describe: String,
+    headerImg: String
+  },
   name: 'DetailBanner',
   components: {
     Gallery,
@@ -32,11 +41,7 @@ export default {
   data () {
     return {
       show: false,
-      backShow: true,
-      imgs: [
-        'http://img1.qunarzz.com/sight/p0/1603/5d/5dd523afbdbb037c90.water.jpg_r_800x800_181ae7c9.jpg',
-        'http://img1.qunarzz.com/sight/p0/1412/af/03f05e00b14e2ba10bee9acb6fd6ef71.water.jpg_r_800x800_00da32fc.jpg'
-      ]
+      backShow: true
     }
   },
   methods: {

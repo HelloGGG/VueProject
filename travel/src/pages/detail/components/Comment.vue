@@ -6,10 +6,10 @@
             <span class="good iconfont" ref="good"></span>
             <span class="bad iconfont" ref="bad"></span>
           </div>
-          <div class="datetime">{{user.name}}&nbsp;&nbsp;{{user.date}}</div>
+          <div class="datetime">{{user.author}}&nbsp;&nbsp;{{user.date}}</div>
       </div>
       <div class="words" :class="{intercept: isActive }" ref="words">
-        {{user.words}}
+        {{user.content}}
       </div>
       <div v-if="isControl">
          <list-more class="listmore-custom"
@@ -29,11 +29,11 @@
         v-for="(item, index) in user.imgs"
         :key="index"
         >
-          <img :src="item" alt="">
+          <img :src="item.small" alt="">
         </div>
       </div>
       </div>
-      <gallery :imgs="originImgs"
+      <gallery :imgs="user.imgs"
           v-if="galleryShow"
           @close="handleClose"
       ></gallery>
@@ -61,16 +61,6 @@ export default {
       galleryShow: false
     }
   },
-  computed: {
-    originImgs () {
-      var newImgs = []
-      var arr = [...this.user.imgs]
-      arr.forEach((value, index) => {
-        newImgs.push(value.replace(/_228x168_.+?\.jpg/, ''))
-      })
-      return newImgs
-    }
-  },
   methods: {
     handleListMoreClick () {
       this.isActive = !this.isActive
@@ -89,10 +79,10 @@ export default {
   mounted () {
     var gContent = ''
     var bContent = ''
-    for (let i = 0; i < this.user.stars; i++) {
+    for (let i = 0; i < this.user.score; i++) {
       gContent += '&#xe642;'
     }
-    for (let i = 0; i < 5 - this.user.stars; i++) {
+    for (let i = 0; i < 5 - this.user.score; i++) {
       bContent += '&#xe642;'
     }
     // 页面元素挂载时初始化操作

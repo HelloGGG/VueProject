@@ -1,12 +1,29 @@
 <template>
   <div>
-    <detail-header></detail-header>
-    <detail-banner></detail-banner>
-    <detail-brief-info></detail-brief-info>
-    <detail-recommand></detail-recommand>
-    <detail-ticket @ticketMore="handleTicketMore" :isTicketMore="isTicketMore"></detail-ticket>
-    <detail-comment></detail-comment>
-    <detail-book :days="days"></detail-book>
+    <detail-header :headerTitle="headerTitle"></detail-header>
+    <detail-banner
+      :imgsNum="imgsNum"
+      :describe="describe"
+      :headerImg="headerImg"
+    ></detail-banner>
+    <detail-brief-info
+      :location="location"
+      :score="score"
+      :comPlan="comPlan"
+    ></detail-brief-info>
+    <detail-recommand
+      v-if="recomTickets"
+      :recomTickets="recomTickets"
+    ></detail-recommand>
+    <detail-ticket
+      @ticketMore="handleTicketMore"
+      :isTicketMore="isTicketMore"
+      :tickets="tickets"
+    ></detail-ticket>
+    <detail-comment
+      :commentList="commentList"
+    ></detail-comment>
+    <detail-book></detail-book>
   </div>
 </template>
 
@@ -18,6 +35,8 @@ import DetailRecommand from './components/DetailRecommand'
 import DetailTicket from './components/DetailTicket'
 import DetailComment from './components/DetailComment'
 import DetailBook from './components/DetailBook'
+import axios from 'axios'
+import { mapState } from 'vuex'
 export default {
   name: 'Detail',
   components: {
@@ -29,51 +48,52 @@ export default {
     DetailComment,
     DetailBook
   },
+  computed: {
+    ...mapState(['defaultSightId', 'defaultDetailUrl'])
+  },
   data () {
     return {
       isTicketMore: false,
-      list: [
-        {
-          title: '成人票',
-          children: [
-            {
-              title: '成人三日游',
-              children: [{
-                title: '某某旅游社提供'
-              }]
-            }
-          ]
-        }, {
-          title: '儿童票'
-        }, {
-          title: '团体票'
-        }
-      ],
-      days: [
-        {
-          canBuy: false,
-          name: '今天',
-          day: '9月18日'
-        }, {
-          canBuy: true,
-          name: '明天',
-          day: '9月19日'
-        }, {
-          canBuy: true,
-          name: '后天',
-          day: '9月20日'
-        }, {
-          canBuy: true,
-          name: '其他日子',
-          day: ''
-        }
-      ]
+      score: '',
+      comPlan: '',
+      headerTitle: '',
+      commentList: [],
+      describe: '',
+      imgsNum: '',
+      headerImg: '',
+      location: '',
+      plans: '',
+      recomTickets: [],
+      tickets: []
     }
   },
   methods: {
     handleTicketMore () {
       this.isTicketMore = true
+    },
+    getDetailData () {
+      axios.get('/api/detail?sightId=' + this.$store.state.defaultSightId + '&detailUrl=' + this.$store.state.defaultDetailUrl).then(this.getDetailDataSucc)
+    },
+    getDetailDataSucc (res) {
+      console.log(res)
+      if (res) {
+        const data = res.data
+        this.score = data.score
+        this.comPlan = data.comPlan
+        this.commentList = data.commentList
+        this.headerTitle = data.headerTitle
+        this.describe = data.describe
+        this.imgsNum = data.imgsNum
+        this.headerImg = data.headerImg
+        this.location = data.location
+        this.plans = data.plans
+        this.recomTickets = data.recomTickets
+        this.tickets = data.tickets
+      }
     }
+  },
+  mounted () {
+    this.getDetailData()
   }
 }
 </script>

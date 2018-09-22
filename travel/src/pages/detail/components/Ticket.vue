@@ -1,24 +1,26 @@
 <template>
-  <div class="ticket-item">
-      <div class="ticket-name">{{item.title}}</div>
+  <div>
+    <div class="ticket-item">
+      <div class="ticket-name">{{item.smallName}}</div>
       <div class="ticket-price">
         <span class="symbo">¥</span>
-        {{item.price}}
+            {{item.roughPrice}}
         <span class="iconfont" @click="handleDownClick" v-show="!ticketShow">起 &#xe62e;</span>
         <span class="iconfont" @click="handleDownClick" v-show="ticketShow">起 &#xe62c;</span>
       </div>
       <ticket-info
       class="custom-bg"
-      v-for="ritem in recommandList"
-      :key="ritem.id"
-      :tags="ritem.tags"
+      v-for="(ritem, index) in item.specs"
+      :key="index"
+      :tags="ritem.labelIcons"
       v-show="ticketShow"
       >
         <template slot="title">{{ritem.title}}</template>
-        <template slot="time">{{ritem.time}}</template>
+        <template slot="time">{{ritem.desctag}}</template>
         <template slot="price">{{ritem.price}}</template>
       </ticket-info>
     </div>
+  </div>
 </template>
 
 <script>
@@ -26,7 +28,6 @@ import TicketInfo from 'common/TicketInfo'
 export default {
   props: {
     item: Object,
-    recommandList: Array,
     isTicketMore: Boolean
   },
   components: {
