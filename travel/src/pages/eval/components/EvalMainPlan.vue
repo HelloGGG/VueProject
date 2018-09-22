@@ -1,15 +1,15 @@
 <template>
   <div class="eval-main">
     <div class="eval-img-container">
-      <img :src="user.imgs[0]" alt="">
+      <img :src="user.imgs[0].big" alt="">
       <div class="iconfont eval-icon">&#xe600;&nbsp;&nbsp;{{user.imgs.length}}</div>
     </div>
     <div class="eval-content">
       <div class="avatar-wrapper">
-        <img  class="avatar" :src="user.avatar" alt="">
+        <img  class="avatar" :src="'http:' + user.headImg" alt="">
       </div>
       <div class="info">
-        <div class="user-name">{{user.name}}</div>
+        <div class="user-name">{{user.author}}</div>
          <div class="starlevel">
             <span class="good iconfont" ref="good"></span>
             <span class="bad iconfont" ref="bad"></span>
@@ -17,7 +17,7 @@
       </div>
       <div class="date">{{user.date}}</div>
       <div class="eval-words" ref="words"  :class="{intercept: isActive }">
-        {{user.words}}
+        {{user.content}}
       </div>
     </div>
     <div v-if="isControl">
@@ -62,10 +62,10 @@ export default {
   mounted () {
     var gContent = ''
     var bContent = ''
-    for (let i = 0; i < this.user.stars; i++) {
+    for (let i = 0; i < this.user.score; i++) {
       gContent += '&#xe642;'
     }
-    for (let i = 0; i < 5 - this.user.stars; i++) {
+    for (let i = 0; i < 5 - this.user.score; i++) {
       bContent += '&#xe642;'
     }
     this.$refs.good.innerHTML = gContent

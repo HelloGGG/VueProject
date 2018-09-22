@@ -20,7 +20,7 @@
       <router-link
         tag="div"
         class="iconfont icon-backto"
-        to="/detail/:id"
+        to="/detail"
         >&#xe624;</router-link>
     </div>
     <div class="h-main"></div>

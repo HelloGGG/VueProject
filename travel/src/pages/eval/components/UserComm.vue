@@ -1,16 +1,16 @@
 <template>
   <div class="user-wrapper">
     <div class="name-stars">
-      <span class="u-name">{{user.name}}</span>
+      <span class="u-name">{{user.author}}</span>
       <div class="starlevel">
         <span class="good iconfont" ref="good"></span>
         <span class="bad iconfont" ref="bad"></span>
       </div>
     </div>
     <div class="date">{{user.date}}</div>
-    <img class="avatar" :src="user.avatar"/>
+    <img class="avatar" :src="'http:' + user.headImg"/>
     <div class="words" :class="{intercept: isActive }" ref="words">
-      {{user.words}}
+      {{user.content}}
     </div>
     <div v-if="isControl">
         <list-more class="listmore-custom"
@@ -29,7 +29,7 @@
       v-for="(img, index) in user.imgs"
       :key="index"
       class="img"
-      :src="img"
+      :src="img.big"
       @click="handleImgClick(index)"
       >
     </div>
@@ -65,11 +65,11 @@ export default {
     handleListMoreClick () {
       this.isActive = !this.isActive
       this.listmodeShow = !this.listmodeShow
+      console.log('http:' + this.user.headImg)
     },
     handleImgClick (index) {
       this.galleryShow = true
       this.changeCurrentPic(index)
-      console.log(this.originImgs)
     },
     handleClose () {
       this.galleryShow = false

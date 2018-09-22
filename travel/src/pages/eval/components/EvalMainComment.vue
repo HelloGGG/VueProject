@@ -3,7 +3,7 @@
     <div class="eval-score border-bottom">
       综合评分
       <div class="iconfont stars">&#xe642;&#xe642;&#xe642;&#xe642;&#xe642;</div>
-      <div class="spec-socre"><span>4.9</span>/5分</div>
+      <div class="spec-socre"><span>{{commentAvgScore}}</span>/5分</div>
     </div>
     <ul class="eval-tags"
       ref="tags"
@@ -14,7 +14,7 @@
       :key="index"
       @click="handleTagClick(index)"
       ref="tag"
-      >{{item}}</li>
+      >{{item.tagName}} {{item.tagNum}}</li>
     </ul>
     <div v-if="isControl">
       <list-more class="listmore-custom"
@@ -28,8 +28,8 @@
       >&#xe62e;
       </list-more>
     </div>
-    <user-comm v-for="user in users"
-     :key="user.id"
+    <user-comm v-for="(user, index) in users"
+     :key="index"
      :user="user"
     ></user-comm>
   </div>
@@ -40,28 +40,16 @@ import ListMore from 'common/ListMore'
 import UserComm from './UserComm'
 export default {
   props: {
-    users: Array
+    users: Array,
+    tags: Array,
+    commentAvgScore: String
   },
   name: 'EvalMainComment',
   data () {
     return {
       listmodeShow: false,
       isActive: false,
-      isControl: false,
-      tags: [
-        '全部',
-        '好评 12707',
-        '有图 12707',
-        '待改善 12707',
-        '最新',
-        '来自订单 11742',
-        '江南水乡 956',
-        '江南水乡 956',
-        '江南水乡 956',
-        '江南水乡 956',
-        '江南水乡 956',
-        '江南水乡 956'
-      ]
+      isControl: false
     }
   },
   components: {

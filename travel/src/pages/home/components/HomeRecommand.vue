@@ -44,24 +44,29 @@ export default {
         did: detailUrl
       })
     },
+    renderStars () {
+      for (let k = 0; k < this.list.length; k++) {
+        var gContent = ''
+        var bContent = ''
+        var obj = this.list[k]
+        var stars = Math.ceil(obj.stars)
+        for (let i = 0; i < stars; i++) {
+          gContent += '&#xe642;'
+        }
+        for (let i = 0; i < 5 - stars; i++) {
+          bContent += '&#xe642;'
+        }
+        this.$refs.good[k].innerHTML = gContent
+        this.$refs.bad[k].innerHTML = bContent
+      }
+    },
     ...mapMutations(['changeDetail'])
   },
   mounted () {
-    for (let k = 0; k < this.list.length; k++) {
-      var gContent = ''
-      var bContent = ''
-      var obj = this.list[k]
-      var stars = Math.ceil(obj.stars)
-      console.log(stars)
-      for (let i = 0; i < stars; i++) {
-        gContent += '&#xe642;'
-      }
-      for (let i = 0; i < 5 - stars; i++) {
-        bContent += '&#xe642;'
-      }
-      this.$refs.good[k].innerHTML = gContent
-      this.$refs.bad[k].innerHTML = bContent
-    }
+    this.renderStars()
+  },
+  activated () {
+    this.renderStars()
   }
 }
 </script>
@@ -71,12 +76,12 @@ export default {
   .good
     color: #ffb436
     margin: 0
-    font-size: .05rem
+    font-size: .2rem
   .bad
     position: relative
     color: #ddd
     margin: 0
-    font-size: .1rem
+    font-size: .2rem
     right: .08rem
   .title
     overflow: hidden

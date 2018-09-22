@@ -72,7 +72,7 @@ export default {
       this.isTicketMore = true
     },
     getDetailData () {
-      axios.get('/api/detail?sightId=' + this.$store.state.defaultSightId + '&detailUrl=' + this.$store.state.defaultDetailUrl).then(this.getDetailDataSucc)
+      axios.get('/api/detail?sightId=' + this.$store.state.sightId + '&detailUrl=' + this.$store.state.detailUrl).then(this.getDetailDataSucc)
     },
     getDetailDataSucc (res) {
       console.log(res)

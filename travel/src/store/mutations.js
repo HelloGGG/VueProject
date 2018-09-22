@@ -15,7 +15,14 @@ export default {
     state.isShowMask = isShowMask
   },
   changeDetail (state, detail) {
-    state.defaultSightId = detail.sid
-    state.defaultDetailUrl = detail.did
+    state.sightId = detail.sid
+    state.detailUrl = detail.did
+    try {
+      // 浏览器缓存,刷新还是刚刚的页面
+      localStorage.sightId = detail.sid
+      localStorage.detailUrl = detail.did
+    } catch (e) {
+      console.log('localStorage error')
+    }
   }
 }
