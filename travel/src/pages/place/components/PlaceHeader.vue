@@ -2,7 +2,7 @@
   <div>
     <div class="pl-header">
       详情介绍
-      <router-link tag="div" to="/detail/:id" class="iconfont backto">&#xe624;</router-link>
+      <router-link tag="div" to="/detail" class="iconfont backto">&#xe624;</router-link>
     </div>
     <div class="header-padding"></div>
   </div>

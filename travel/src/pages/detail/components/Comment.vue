@@ -26,10 +26,10 @@
       <div class="pic-display">
         <div class="pic-wrap"
         @click="handleImgClick(index)"
-        v-for="(item, index) in user.imgs"
+        v-for="(item, index) in shouldShowImgs"
         :key="index"
         >
-          <img :src="item.small" alt="">
+          <img :src="item.small"/>
         </div>
       </div>
       </div>
@@ -59,6 +59,17 @@ export default {
       isActive: false,
       isControl: false,
       galleryShow: false
+    }
+  },
+  computed: {
+    shouldShowImgs () {
+      var container = []
+      for (let i = 0; i < this.user.imgs.length; i++) {
+        if (i <= 5) {
+          container.push(this.user.imgs[i])
+        }
+      }
+      return container
     }
   },
   methods: {

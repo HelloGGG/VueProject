@@ -29,7 +29,9 @@ try {
 export default {
   city: defaultCity,
   currentPic: 0,
-  isShowMask: false,
   sightId: defaultSightId,
-  detailUrl: defaultDetailUrl
+  detailUrl: defaultDetailUrl,
+  bookTicketStatus: false,
+  bookTicketTitle: '',
+  bookTicketPrice: ''
 }

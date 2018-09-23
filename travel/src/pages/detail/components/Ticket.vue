@@ -14,10 +14,11 @@
       :key="index"
       :tags="ritem.labelIcons"
       v-show="ticketShow"
+      :item="ritem"
       >
         <template slot="title">{{ritem.title}}</template>
         <template slot="time">{{ritem.desctag}}</template>
-        <template slot="price">{{ritem.price}}</template>
+        <template slot="price">{{ritem.specificPrice}}</template>
       </ticket-info>
     </div>
   </div>

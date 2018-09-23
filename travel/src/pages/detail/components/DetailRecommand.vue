@@ -8,6 +8,7 @@
       v-for="(item, index) in recomTickets"
       :key="index"
       :tags="item.labelIcons"
+      :item="item"
       >
       <template slot="title">{{item.title}}</template>
       <template slot="time">{{item.desctag}}</template>

@@ -12,7 +12,7 @@ export default {
   name: 'PreviewHeader',
   methods: {
     handleClick () {
-      this.$router.push('/detail/:id')
+      this.$router.push('/detail')
     }
   }
 }

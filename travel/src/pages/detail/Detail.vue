@@ -1,5 +1,6 @@
 <template>
   <div>
+    <loading-tip v-if="isLoading">加载中</loading-tip>
     <detail-header :headerTitle="headerTitle"></detail-header>
     <detail-banner
       :imgsNum="imgsNum"
@@ -24,6 +25,7 @@
       :commentList="commentList"
     ></detail-comment>
     <detail-book></detail-book>
+    <my-calendar></my-calendar>
   </div>
 </template>
 
@@ -35,6 +37,8 @@ import DetailRecommand from './components/DetailRecommand'
 import DetailTicket from './components/DetailTicket'
 import DetailComment from './components/DetailComment'
 import DetailBook from './components/DetailBook'
+import LoadingTip from 'common/LoadingTip'
+import MyCalendar from 'common/MyCalendar'
 import axios from 'axios'
 import { mapState } from 'vuex'
 export default {
@@ -46,7 +50,9 @@ export default {
     DetailRecommand,
     DetailTicket,
     DetailComment,
-    DetailBook
+    DetailBook,
+    LoadingTip,
+    MyCalendar
   },
   computed: {
     ...mapState(['defaultSightId', 'defaultDetailUrl'])
@@ -64,7 +70,9 @@ export default {
       location: '',
       plans: '',
       recomTickets: [],
-      tickets: []
+      tickets: [],
+      isLoading: true,
+      latestSightId: ''
     }
   },
   methods: {
@@ -90,10 +98,20 @@ export default {
         this.recomTickets = data.recomTickets
         this.tickets = data.tickets
       }
+      this.isLoading = false
     }
   },
   mounted () {
     this.getDetailData()
+    this.isLoading = true
+    this.latestSightId = this.$store.state.sightId
+  },
+  activated () {
+    if (this.latestSightId !== this.$store.state.sightId) {
+      this.getDetailData()
+      this.isLoading = true
+      this.latestSightId = this.$store.state.sightId
+    }
   }
 }
 </script>

@@ -1,5 +1,6 @@
 <template>
     <div>
+        <loading-tip v-if="isLoading">加载中</loading-tip>
         <home-header></home-header>
         <home-swiper :list="swiperList"></home-swiper>
         <home-icons :list="iconsList"></home-icons>
@@ -16,6 +17,7 @@ import HomeSwiper from './components/HomeSwiper'
 import HomeIcons from './components/HomeIcons'
 import HomeRecommand from './components/HomeRecommand'
 import HomeWeekend from './components/HomeWeekend'
+import LoadingTip from 'common/LoadingTip'
 import axios from 'axios'
 import { mapState } from 'vuex'
 export default {
@@ -25,7 +27,8 @@ export default {
     HomeSwiper,
     HomeIcons,
     HomeRecommand,
-    HomeWeekend
+    HomeWeekend,
+    LoadingTip
   },
   data () {
     return {
@@ -33,7 +36,8 @@ export default {
       iconsList: [],
       recommandList: [],
       weekendList: [],
-      latestCity: ''
+      latestCity: '',
+      isLoading: true
     }
   },
   computed: {
@@ -52,16 +56,19 @@ export default {
         this.recommandList = data.places
         this.weekendList = data.weekendRecommand
       }
+      this.isLoading = false
     }
   },
   mounted () {
     this.getHomeData()
+    this.isLoading = true
     this.latestCity = this.city
   },
   // keep-alive 组件激活时调用
   activated () {
     if (this.latestCity !== this.city) {
       this.getHomeData()
+      this.isLoading = true
       this.latestCity = this.city
     }
   }

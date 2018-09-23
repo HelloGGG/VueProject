@@ -1,18 +1,19 @@
 <template>
-  <div class="b-wrapper" v-show="isShowMask">
+  <div class="b-wrapper" v-show="bookTicketStatus">
     <div class="b-mask" @click="handleCloseClick"></div>
     <div class="b-content">
-      <div class="b-title">嘉兴乌镇东栅+西栅大门票</div>
-      <div class="b-price"><span>¥ </span><span class="emphasize">200</span> /张</div>
+      <div class="b-title">{{bookTicketTitle}}</div>
+      <div class="b-price"><span>¥
+        </span><span class="emphasize">{{bookTicketPrice}}</span> /张</div>
       <div class="b-calendar">价格日历</div>
       <div class="calendar-tags">
         <day-tag v-for="(item, index) in days" :key="index"
-          :class="{disabled: !item.canBuy}"
+          :class="{disabled: !item.valid}"
           ref="tag"
           @click.native="handleDayClick(index)"
         >
-          <template slot="day">{{item.name}}</template>
-          <template slot="specific">{{item.day}}</template>
+          <template slot="day">{{item.dateName}}</template>
+          <template slot="specific">{{item.date}}</template>
         </day-tag>
       </div>
       <div class="tip-info">需要在游玩前1天的23:45前预订</div>
@@ -26,30 +27,60 @@
 import DayTag from 'common/DayTag'
 import { mapState, mapMutations } from 'vuex'
 export default {
-  props: {
-    days: Array
-  },
   name: 'DetailBook',
   components: {
     DayTag
   },
   data () {
     return {
-      isActived0: true,
-      isActived1: false,
-      isActived2: false,
-      isActived: false
+      item: {
+        status: false,
+        specificPrice: 0,
+        title: ''
+      }
     }
   },
   computed: {
-    ...mapState(['isShowMask'])
+    days () {
+      var ds = []
+      for (let i = 0; i <= 3; i++) {
+        var temp = {}
+        var today = new Date()
+        var dateTime = new Date(today.setDate(today.getDate() + i))
+        temp['date'] = (dateTime.getMonth() + 1) + '月' + dateTime.getDate() + '日'
+        switch (i) {
+          case 0:
+            temp['dateName'] = '今天'
+            temp['valid'] = false
+            break
+          case 1:
+            temp['dateName'] = '明天'
+            temp['valid'] = true
+            break
+          case 2:
+            temp['dateName'] = '后天'
+            temp['valid'] = true
+            break
+          case 3:
+            temp['dateName'] = '其他日期'
+            temp['valid'] = true
+            temp['date'] = ''
+            break
+          default: break
+        }
+        ds.push(temp)
+      }
+      return ds
+    },
+    ...mapState(['bookTicketStatus', 'bookTicketTitle', 'bookTicketPrice'])
   },
   methods: {
     handleCloseClick () {
-      this.showMask(false)
+      this.item.status = false
+      this.showMask(this.item)
     },
     hanldeBookClick () {
-      this.showMask(true)
+      console.log('跳转到预定界面')
     },
     handleDayClick (index) {
       for (let i = 0; i < this.days.length; i++) {

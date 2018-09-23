@@ -16,7 +16,10 @@
         </div>
       </div>
       <div class="price-book">
-        <div class="price"><span>¥</span><slot name="price"></slot></div>
+        <div class="price">
+          <span>¥</span>
+          <slot name="price"></slot>
+          </div>
         <div class="book" @click="handleBookClick">预定</div>
       </div>
     </div>
@@ -26,12 +29,15 @@
 import { mapMutations } from 'vuex'
 export default {
   props: {
-    tags: Array
+    tags: Array,
+    item: Object
   },
   name: 'TicketInfo',
   methods: {
     handleBookClick () {
-      this.showMask(true)
+      this.item.status = true
+      this.showMask(this.item)
+      console.log(this.$store.state)
     },
     handleTipClick () {
       console.log('handleTipClick')

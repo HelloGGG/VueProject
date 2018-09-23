@@ -11,8 +11,10 @@ export default {
   changeCurrentPic (state, currentPic) {
     state.currentPic = currentPic
   },
-  showMask (state, isShowMask) {
-    state.isShowMask = isShowMask
+  showMask (state, info) {
+    state.bookTicketStatus = info.status
+    state.bookTicketTitle = info.title
+    state.bookTicketPrice = info.specificPrice
   },
   changeDetail (state, detail) {
     state.sightId = detail.sid

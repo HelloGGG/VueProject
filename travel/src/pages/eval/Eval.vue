@@ -1,5 +1,6 @@
 <template>
   <div>
+    <loading-tip v-if="isLoading">加载中</loading-tip>
     <eval-header @changeContent="handleChangeContent"></eval-header>
     <eval-main-plan
       v-for="user in users"
@@ -35,13 +36,15 @@
 import EvalHeader from './components/EvalHeader'
 import EvalMainPlan from './components/EvalMainPlan'
 import EvalMainComment from './components/EvalMainComment'
+import LoadingTip from 'common/LoadingTip'
 import axios from 'axios'
 export default {
   name: 'Eval',
   components: {
     EvalHeader,
     EvalMainPlan,
-    EvalMainComment
+    EvalMainComment,
+    LoadingTip
   },
   data () {
     return {
@@ -51,7 +54,8 @@ export default {
       users: [],
       lastestSightId: '',
       tags: [],
-      commentAvgScore: ''
+      commentAvgScore: '',
+      isLoading: true
     }
   },
   methods: {
@@ -85,18 +89,19 @@ export default {
         this.tags = res.data.data.tagList
         this.commentAvgScore = res.data.data.commentAvgScore
       }
+      this.isLoading = false
     }
   },
   mounted () {
     this.lastestSightId = this.$store.state.defaultSightId
     this.getEvalData()
+    this.isLoading = true
   },
   activated () {
-    if (this.isShowPlan) {
-      window.addEventListener('scroll', this.handleScroll)
-    }
+    window.addEventListener('scroll', this.handleScroll)
     if (this.lastestSightId !== this.$store.state.defaultSightId) {
       this.getEvalData()
+      this.isLoading = true
       this.lastestSightId = this.$store.state.defaultSightId
     }
   },
