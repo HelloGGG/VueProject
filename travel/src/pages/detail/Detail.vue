@@ -12,7 +12,7 @@
       :comPlan="comPlan"
     ></detail-brief-info>
     <detail-recommand
-      v-if="recomTickets"
+      v-if="recomTickets.length"
       :recomTickets="recomTickets"
     ></detail-recommand>
     <detail-ticket
