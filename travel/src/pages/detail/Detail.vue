@@ -24,8 +24,15 @@
     <detail-comment
       :commentList="commentList"
     ></detail-comment>
-    <detail-book></detail-book>
-    <my-calendar></my-calendar>
+    <detail-book
+      @showCalendar="handleShowCalendar"
+    ></detail-book>
+    <my-calendar
+    v-show="isCalendarShow"
+    :currentYear="currentYear"
+    :currentMonth="currentMonth"
+    @showCalendar="handleShowCalendar"
+  ></my-calendar>
   </div>
 </template>
 
@@ -55,7 +62,13 @@ export default {
     MyCalendar
   },
   computed: {
-    ...mapState(['defaultSightId', 'defaultDetailUrl'])
+    ...mapState(['defaultSightId', 'defaultDetailUrl']),
+    currentYear () {
+      return (new Date()).getFullYear()
+    },
+    currentMonth () {
+      return (new Date()).getMonth() + 1
+    }
   },
   data () {
     return {
@@ -72,7 +85,8 @@ export default {
       recomTickets: [],
       tickets: [],
       isLoading: true,
-      latestSightId: ''
+      latestSightId: '',
+      isCalendarShow: false
     }
   },
   methods: {
@@ -99,6 +113,9 @@ export default {
         this.tickets = data.tickets
       }
       this.isLoading = false
+    },
+    handleShowCalendar (flag) {
+      this.isCalendarShow = flag
     }
   },
   mounted () {
@@ -112,6 +129,8 @@ export default {
       this.isLoading = true
       this.latestSightId = this.$store.state.sightId
     }
+  },
+  updated () {
   }
 }
 </script>

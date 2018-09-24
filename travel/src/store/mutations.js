@@ -26,5 +26,11 @@ export default {
     } catch (e) {
       console.log('localStorage error')
     }
+  },
+  changeOtherDay (state, otherDay) {
+    state.otherDay = otherDay
+  },
+  changeOtherMonth (state, otherMonth) {
+    state.otherMonth = otherMonth
   }
 }

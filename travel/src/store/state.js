@@ -33,5 +33,7 @@ export default {
   detailUrl: defaultDetailUrl,
   bookTicketStatus: false,
   bookTicketTitle: '',
-  bookTicketPrice: ''
+  bookTicketPrice: '',
+  otherDay: '?',
+  otherMonth: '?'
 }

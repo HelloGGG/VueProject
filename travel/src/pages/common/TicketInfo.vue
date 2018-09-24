@@ -65,8 +65,8 @@ export default {
       margin-right: 1.8rem
     .can-buy
       font-size: .24rem
-      line-height: .32rem
-      height: .32rem
+      line-height: .6rem
+      height: .6rem
     .tips
       display: flex
       margin-top: .1rem

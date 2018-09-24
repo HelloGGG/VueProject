@@ -1,13 +1,16 @@
 <template>
-  <div class="calendar">
-    <div class="calendar-close iconfont">&#xe61a;</div>
-    <div class="calendar-header border-bottom">选择时间</div>
-    <div class="months">
-       <calendar
-      v-for="(month, index) in months"
-      :key="index"
-      :month="month"
-      ></calendar>
+  <div>
+    <div class="mask" @click="handleMaskClick"></div>
+    <div class="calendar">
+      <div class="calendar-close iconfont" @click="handleMaskClick">&#xe61a;</div>
+      <div class="calendar-header border-bottom">选择时间</div>
+      <div class="months">
+        <calendar
+          @closeCalendar="handleCloseCalendar"
+          :defaultCYear="currentYear"
+          :defaultCMonth="currentMonth"
+        ></calendar>
+      </div>
     </div>
   </div>
 </template>
@@ -15,27 +18,39 @@
 <script>
 import Calendar from './Calendar'
 export default {
+  props: {
+    currentYear: Number,
+    currentMonth: Number
+  },
   name: 'MyCalendar',
   components: {
     Calendar
   },
   data () {
     return {
-      months: [
-        {
-          year: 2018,
-          month: 8
-        }, {
-          year: 2018,
-          month: 9
-        }
-      ]
+    }
+  },
+  methods: {
+    handleMaskClick () {
+      this.$emit('showCalendar', false)
+      this.optionClose = true
+    },
+    handleCloseCalendar () {
+      this.$emit('showCalendar', false)
     }
   }
 }
 </script>
 
 <style lang="stylus" scoped>
+  .mask
+    position: fixed
+    top: 0
+    left: 0
+    right: 0
+    bottom: 0
+    background: rgba(0, 0, 0, .6)
+    z-index: 150
   .calendar
     position: fixed
     left: 0
@@ -58,11 +73,5 @@ export default {
       font-size: .4rem
       line-height: 1rem
       text-align: center
-    .months
-      overflow-x: hidden
-      overflow-y: auto
-      min-height: 5.4rem
-      max-height: 6.5rem
-      position: relative
-      width: 100%
+      z-index: 200
 </style>

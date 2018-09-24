@@ -64,7 +64,7 @@ export default {
           case 3:
             temp['dateName'] = '其他日期'
             temp['valid'] = true
-            temp['date'] = ''
+            temp['date'] = this.$store.state.otherMonth + '月' + this.$store.state.otherDay + '日'
             break
           default: break
         }
@@ -88,6 +88,9 @@ export default {
         if (!tagEle.classList.contains('disabled')) {
           i === index ? tagEle.classList.add('actived') : tagEle.classList.remove('actived')
         }
+      }
+      if (index === this.days.length - 1) {
+        this.$emit('showCalendar', true)
       }
     },
     ...mapMutations(['showMask'])
@@ -126,6 +129,7 @@ export default {
     .b-title
       line-height: .8rem
       font-size: .34rem
+      padding-right: .3rem
     .b-price
       line-height: .48rem
       font-size: .24rem

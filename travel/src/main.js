@@ -14,11 +14,13 @@ import 'styles/iconfont.css'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
 import 'swiper/dist/css/swiper.css'
 import 'styles/animation.css'
+import { Select, Option } from 'element-ui'
 
 Vue.config.productionTip = false
 fastClick.attach(document.body)
 Vue.use(VueAwesomeSwiper)
-
+Vue.use(Select)
+Vue.use(Option)
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
