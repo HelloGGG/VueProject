@@ -1,0 +1,31 @@
+{
+  "tickets": [
+  {
+    "bigName": "\u70ed\u9500\u8054\u7968", 
+    "type": [
+      {
+        "smallName": "\u76d0\u5b98\u89c2\u6f6e\u666f\u533a\u8054\u7968", 
+        "roughPrice": "",
+        "specs": [
+          {
+            "desctag": "22:00\u524d\u53ef\u8ba2\u660e\u65e5", 
+            "labelIcons": [
+              "\u968f\u65f6\u9000"
+            ], 
+            "price": "130", 
+            "title": "\u76d0\u5b98\u89c2\u6f6e\u666f\u533a\u89c2\u6f6e\u8282\u8054\u7968\u6210\u4eba\u7968"
+          }, 
+          {
+            "desctag": "22:00\u524d\u53ef\u8ba2\u660e\u65e5", 
+            "labelIcons": [
+              "\u968f\u65f6\u9000"
+            ], 
+            "price": "130", 
+            "title": "\u76d0\u5b98\u89c2\u6f6e\u666f\u533a\u89c2\u6f6e\u8282\u8054\u7968\u6210\u4eba\u7968"
+          }
+        ]
+      }
+    ]
+  }
+]
+}
