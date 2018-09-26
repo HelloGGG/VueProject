@@ -7,9 +7,14 @@
 # obj = json.loads(resText)
 # print(obj.get('data').get('commentList'))
 
-import time
-import datetime
-today = datetime.date.today()
-print(today.month)
-print(today.year)
+# import time
+# import datetime
+# today = datetime.date.today()
+# print(today.month)
+# print(today.year)
 # print(time.localtime(time.time()))
+
+from selenium import webdriver
+
+driver = webdriver.Chrome()
+driver.get('http://www.baidu.com')

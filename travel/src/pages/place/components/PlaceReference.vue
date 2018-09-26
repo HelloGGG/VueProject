@@ -5,21 +5,16 @@
           ref="words"
           :class="{intercept: isActive }"
       >
-        <div class="condition">
-        <div class="condi-title">开放时间</div>
-          <p class="condi-cont">西栅：9:00-22:00；</p>
-          <p class="condi-cont">东栅：夏令7:00-18:00，冬令7:00-17:30</p>
-        </div>
-        <div class="condition">
-          <div class="condi-title">免票政策</div>
-          <p class="condi-cont">凭本人有效证件即可进入 ：</p>
-          <p class="condi-cont">· 国家旅游局颁发的国导证（IC卡）、领队证； </p>
-          <p class="condi-cont">· 国务院、中央军委颁发的老干部离休证； </p>
-          <p class="condi-cont">· 残疾证（中国残疾人联合会制发）、残疾军人证（中华人民民政部制发）；   </p>
-          <p class="condi-cont">·  1.2米以下儿童。 </p>
-          <p class="condi-cont">凭本人以下有效证件至景区接待中心办理相关手续进入： </p>
-          <p class="condi-cont">· 中央新闻总署颁发的最新版本新闻记者证； </p>
-          <p class="condi-cont">· 国家旅游局所颁发的旅行社经理资格证（附本人名片）； </p>
+        <div
+          v-for="(item, index) in refercence"
+          :key="index"
+          class="condition">
+        <div class="condi-title">{{item.title}}</div>
+          <p
+            v-for="pContent in item.content"
+            :key="pContent.id"
+            class="condi-cont"
+          >{{pContent}}</p>
         </div>
       </div>
       <list-more
@@ -36,6 +31,9 @@
 import PlaceTitle from './PlaceTitle'
 import ListMore from 'common/ListMore'
 export default {
+  props: {
+    reference: Array
+  },
   name: 'PlaceReference',
   components: {
     ListMore,
@@ -46,6 +44,11 @@ export default {
       listmodeShow: false,
       isActive: false,
       isControl: false
+    }
+  },
+  computed: {
+    randomNum () {
+      return Math.random() * 10000 + 1
     }
   },
   methods: {

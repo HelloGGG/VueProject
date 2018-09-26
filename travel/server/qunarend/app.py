@@ -24,5 +24,11 @@ def comment():
   spider = CrawlQunar()
   return jsonify(spider.parse_comment(sightId))
 
+@app.route('/api/placeInfo')
+def placeInfo():
+  url = request.args.get('url')
+  spider = CrawlQunar()
+  return jsonify(spider.parse_place(url))
+
 if __name__ == '__main__':
   app.run(debug=True, host='0.0.0.0')

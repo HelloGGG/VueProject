@@ -85,6 +85,7 @@ class CrawlQunar(object):
     placeInfo['headerImg'] = detailSoup.select('.mp-headfigure-img')[0].attrs['src']
     placeInfo['score'] = detailSoup.select('span.mp-commentcard-score')[0].get_text()
     placeInfo['comPlan'] = detailSoup.select('.mp-totalcommentnum')[0].get_text()
+    placeInfo['placeUrl'] = 'http:' + detailSoup.select('.mpg-flexbox-item.mp-border-left.mp-flexlink-con a')[0].attrs['href']
     # 获取comment
     placeInfo['commentList'] = self.parse_comment(sightId).get('data').get('commentList')
     time.sleep(1.0)
@@ -147,6 +148,72 @@ class CrawlQunar(object):
   def parse_comment(self, sightId):
     return  json.loads(requests.get(COMMENT_URL.format(sightId), timeout=TIME_OUT).text)
 
+  def parse_place(self, url):
+    result = {
+      'reference': [],
+      'play': [],
+      'tips': [],
+      'transportation': []
+
+    }
+    requests.get(url, timeout=TIME_OUT)
+    placeSoup = BeautifulSoup(requests.get(url, timeout=TIME_OUT).text, 'lxml')
+    ares = placeSoup.select('.mp-area')
+    texts = []
+    imgs = []
+
+    referenceItems = ares[0].select('.mp-text-item')
+    imgWraps = ares[1].select('.mp-imgwrap')
+    textInfos = ares[2].select('div.mp-text-info p')
+    transportations = ares[3].select('.mp-area-content')
+    print(transportations)
+    # 入园参考
+    for item in referenceItems:
+      temp = {}
+      temp['title'] = item.select('.mp-text-title')[0].get_text()
+      arr = []
+      for p in item.select('div.mp-text-info p'):
+        arr.append(p.get_text())
+      temp['content'] = arr
+      result['reference'].append(temp)
+
+    temp={
+      'imgs': [],
+      'info': [],
+    }
+    # 特色玩法
+    for img in imgWraps:
+    
+      for im in img.select('img.mp-img'):
+        temp['imgs'].append(im.attrs['data-original-src'])
+
+      for info in img.select('p.mp-imginfo'):
+        temp['info'].append(info.get_text())
+    
+    imgs.append(temp)
+    result['play'] = imgs
+    # 温馨提示
+    for text in textInfos:
+      texts.append(text.get_text())
+    
+    result['tips'] = texts
+
+
+    myMap ={
+      'mapImg': '',
+      'routes': []
+    }
+    # 交通
+    for tr in transportations[0].select('.mp-text-item'):
+      temp = {}
+      temp['rName'] = tr.select('.mp-text-title')[0].get_text()
+      for one_route in tr.select('.mp-text-info p'):
+        arr = []
+        arr.append(one_route.get_text())
+      temp['ro'] = arr 
+      myMap['routes'].append(temp)
+    result['transportation'] = myMap
+    return result
 
 if __name__ == '__main__':
   begin_time = time.time()

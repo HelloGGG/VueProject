@@ -13,8 +13,13 @@
         <div class="bottom">{{comPlan}}</div>
         <div class="arrow-r iconfont custom_c">&#xe62d;</div>
       </router-link>
-      <router-link tag="div" to="/place/:id" class="info-intro  border-bottom">
-        <div class="top" >景点简介</div>
+      <router-link
+        tag="div"
+        to="/place"
+        class="info-intro  border-bottom"
+        @click="handlePlaceClick"
+        >
+        <div class="top">景点简介</div>
         <div class="bottom">开放时间/贴士</div>
         <div class="arrow-r iconfont custom_c">&#xe62d;</div>
       </router-link>
@@ -27,13 +32,21 @@
 </template>
 
 <script>
+import { mapMutations } from 'vuex'
 export default {
   props: {
     score: String,
     comPlan: String,
-    location: String
+    location: String,
+    placeUrl: String
   },
-  name: 'DetailBriefIndo'
+  name: 'DetailBriefIndo',
+  methods: {
+    handlePlaceClick () {
+      this.changePlace(this.placeUrl)
+    },
+    ...mapMutations(['changePlace'])
+  }
 }
 </script>
 

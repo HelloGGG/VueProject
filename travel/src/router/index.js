@@ -31,7 +31,7 @@ export default new Router({
       name: 'Eval',
       component: Eval
     }, {
-      path: '/place/:id',
+      path: '/place',
       name: 'Place',
       component: Place
     }

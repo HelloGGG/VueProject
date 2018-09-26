@@ -1,10 +1,10 @@
 <template>
   <div>
     <place-header></place-header>
-    <place-reference></place-reference>
-    <place-play></place-play>
-    <place-tip></place-tip>
-    <place-transport></place-transport>
+    <place-reference :reference="reference"></place-reference>
+    <place-play :play="play"></place-play>
+    <place-tip :tips="tips"></place-tip>
+    <place-transport :transportation="transportation"></place-transport>
   </div>
 </template>
 
@@ -14,6 +14,7 @@ import PlaceReference from './components/PlaceReference'
 import PlacePlay from './components/PlacePlay'
 import PlaceTip from './components/PlaceTip'
 import PlaceTransport from './components/PlaceTransport'
+import axios from 'axios'
 export default {
   name: 'Place',
   components: {
@@ -22,6 +23,30 @@ export default {
     PlacePlay,
     PlaceTip,
     PlaceTransport
+  },
+  data () {
+    return {
+      reference: [],
+      play: [],
+      tips: [],
+      transportation: {}
+    }
+  },
+  methods: {
+    getPlaceData () {
+      axios.get('api/placeInfo?url=' + this.$store.state.place).then(this.getPlaceDataSucc)
+    },
+    getPlaceDataSucc (res) {
+      if (res) {
+        this.reference = res.data.reference
+        this.tips = res.data.tips
+        this.transportation = res.data.transportation
+        this.play = res.data.play
+      }
+    }
+  },
+  mounted () {
+    this.getPlaceData()
   }
 }
 </script>

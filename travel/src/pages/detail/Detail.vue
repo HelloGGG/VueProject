@@ -11,6 +11,7 @@
       :location="location"
       :score="score"
       :comPlan="comPlan"
+      :placeUrl="placeUrl"
     ></detail-brief-info>
     <detail-recommand
       v-if="recomTickets.length"
@@ -79,6 +80,7 @@ export default {
       commentList: [],
       describe: '',
       imgsNum: '',
+      placeUrl: '',
       headerImg: '',
       location: '',
       plans: '',
@@ -106,6 +108,7 @@ export default {
         this.headerTitle = data.headerTitle
         this.describe = data.describe
         this.imgsNum = data.imgsNum
+        this.placeUrl = data.placeUrl
         this.headerImg = data.headerImg
         this.location = data.location
         this.plans = data.plans

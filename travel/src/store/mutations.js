@@ -32,5 +32,8 @@ export default {
   },
   changeOtherMonth (state, otherMonth) {
     state.otherMonth = otherMonth
+  },
+  changePlace (state, url) {
+    state.place = url
   }
 }
