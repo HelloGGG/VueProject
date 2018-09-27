@@ -6,13 +6,14 @@
           :class="{intercept: isActive }"
       >
         <div
-          v-for="(item, index) in refercence"
+          v-for="(item, index) in reference"
           :key="index"
-          class="condition">
+          class="condition"
+        >
         <div class="condi-title">{{item.title}}</div>
           <p
             v-for="pContent in item.content"
-            :key="pContent.id"
+            :key="pContent"
             class="condi-cont"
           >{{pContent}}</p>
         </div>

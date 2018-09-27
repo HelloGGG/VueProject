@@ -3,7 +3,7 @@
     <place-title>交通和到达</place-title>
     <div class="play-content">
       <div class="play-map">
-        <img src="http://api.map.baidu.com/staticimage/v2?ak=D0ba2606b334fb2565df2646e9f8a479&center=120.494465,30.754749&width=370&height=200&zoom=14&scale=2&markers=120.494465,30.754749&markerStyles=-1,http://simg1.qunarzz.com/piao/images/map_icon.png" alt="">
+        <img src="http://api.map.baidu.com/staticimage/v2?ak=D0ba2606b334fb2565df2646e9f8a479&center=120.494465,30.754749&width=370&height=200&zoom=14&scale=2&markers=120.494465,30.754749&markerStyles=-1,http://simg1.qunarzz.com/piao/images/map_icon.png">
       </div>
       <div
         v-for="(value, key, index) in transportation"

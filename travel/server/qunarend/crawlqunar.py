@@ -160,13 +160,12 @@ class CrawlQunar(object):
     placeSoup = BeautifulSoup(requests.get(url, timeout=TIME_OUT).text, 'lxml')
     ares = placeSoup.select('.mp-area')
     texts = []
-    imgs = []
 
     referenceItems = ares[0].select('.mp-text-item')
     imgWraps = ares[1].select('.mp-imgwrap')
     textInfos = ares[2].select('div.mp-text-info p')
-    transportations = ares[3].select('.mp-area-content')
-    print(transportations)
+    # transportations = ares[3].select('.mp-area-content')
+    # print(transportations)
     # 入园参考
     for item in referenceItems:
       temp = {}
@@ -180,6 +179,7 @@ class CrawlQunar(object):
     temp={
       'imgs': [],
       'info': [],
+      'text': []
     }
     # 特色玩法
     for img in imgWraps:
@@ -190,8 +190,22 @@ class CrawlQunar(object):
       for info in img.select('p.mp-imginfo'):
         temp['info'].append(info.get_text())
     
-    imgs.append(temp)
-    result['play'] = imgs
+    for text in ares[1].select('.mp-text-item div.mp-text-info'):
+      temp['text'].append(text.get_text())
+
+
+    obj = []
+    for index in range(len(temp.get('imgs'))):
+      tempObj = {}
+      try:
+        tempObj['img'] = temp['imgs'][index]
+        tempObj['info'] = temp['info'][index]
+        tempObj['text'] = temp['text'][index]
+      except:
+        tempObj = {}
+      obj.append(tempObj)
+
+    result['play'] = obj
     # 温馨提示
     for text in textInfos:
       texts.append(text.get_text())
@@ -204,15 +218,15 @@ class CrawlQunar(object):
       'routes': []
     }
     # 交通
-    for tr in transportations[0].select('.mp-text-item'):
-      temp = {}
-      temp['rName'] = tr.select('.mp-text-title')[0].get_text()
-      for one_route in tr.select('.mp-text-info p'):
-        arr = []
-        arr.append(one_route.get_text())
-      temp['ro'] = arr 
-      myMap['routes'].append(temp)
-    result['transportation'] = myMap
+    # for tr in transportations[0].select('.mp-text-item'):
+    #   temp = {}
+    #   temp['rName'] = tr.select('.mp-text-title')[0].get_text()
+    #   for one_route in tr.select('.mp-text-info p'):
+    #     arr = []
+    #     arr.append(one_route.get_text())
+    #   temp['ro'] = arr 
+    #   myMap['routes'].append(temp)
+    # result['transportation'] = myMap
     return result
 
 if __name__ == '__main__':

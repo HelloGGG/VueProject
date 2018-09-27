@@ -4,7 +4,7 @@
     <place-reference :reference="reference"></place-reference>
     <place-play :play="play"></place-play>
     <place-tip :tips="tips"></place-tip>
-    <place-transport :transportation="transportation"></place-transport>
+    <!-- <place-transport :transportation="transportation"></place-transport> -->
   </div>
 </template>
 
@@ -29,7 +29,8 @@ export default {
       reference: [],
       play: [],
       tips: [],
-      transportation: {}
+      transportation: {},
+      latestUrl: ''
     }
   },
   methods: {
@@ -47,6 +48,14 @@ export default {
   },
   mounted () {
     this.getPlaceData()
+    this.latestUrl = this.$store.state.place
+  },
+  activated () {
+    if (this.latestUrl !== this.$store.state.place) {
+      this.getPlaceData()
+      console.log(this.$store.state.place)
+      this.latestUrl = this.$store.state.place
+    }
   }
 }
 </script>

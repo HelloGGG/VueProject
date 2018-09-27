@@ -35,5 +35,11 @@ export default {
   },
   changePlace (state, url) {
     state.place = url
+    try {
+      // 浏览器缓存,刷新还是刚刚的页面
+      localStorage.place = url
+    } catch (e) {
+      console.log('localStorage error')
+    }
   }
 }

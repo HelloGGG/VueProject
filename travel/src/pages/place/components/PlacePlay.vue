@@ -2,14 +2,14 @@
    <div>
      <place-title>特色玩法</place-title>
      <div
-      v-for="(value, key, index) in play[0]"
-      :key="key"
+      v-for="(value, index) in play"
+      :key="index"
       class="play-item">
        <div class="img-wrapper">
-        <img :src="value[index]" alt="">
-        <div class="img-descri">{{value[index]}}</div>
+        <img :src="value.img" alt="">
+        <div class="img-descri">{{value.info}}</div>
        </div>
-       <p class="play-words">展出江南古床的博物馆，面积约1200多平方米，内收数十张明、清、近代的江南古床精品。</p>
+       <p class="play-words">{{value.text}}</p>
      </div>
    </div>
 </template>

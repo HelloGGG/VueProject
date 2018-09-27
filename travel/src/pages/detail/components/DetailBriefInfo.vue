@@ -17,7 +17,7 @@
         tag="div"
         to="/place"
         class="info-intro  border-bottom"
-        @click="handlePlaceClick"
+        @click.native="handlePlaceClick"
         >
         <div class="top">景点简介</div>
         <div class="bottom">开放时间/贴士</div>
